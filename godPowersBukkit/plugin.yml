@@ -1,0 +1,49 @@
+name: godPowers
+main: com.FriedTaco.taco.godPowers.godPowers
+version: 2.0
+commands:
+    godMode:
+        description: Become invincible!
+        usage: /godMode
+    jesus:
+        description: You feel like you can walk on water.... Maybe even lava!
+        usage: /jesus
+    heal:
+        description: Heals you. Duh.
+        usage: /heal
+    die:
+        description: I wonder what this does! :o
+        usage: /die
+    slay:
+        description: Slay your enemies with just the press of a few keys!
+        usage: /slay
+    maim:
+        description: Beat those disobediant players within an inch of their lives!
+        usage: /maim
+    inferno:
+        description: Burn the ground behind you with the power of your fiery rage!
+        usage: /inferno
+    superjump:
+        description: Gain the ability to leap tall buildings in a single bound!
+        usage: /superjump
+    godmodeon:
+        description: Enable godmode (Temporary fix for conflict with Essentials).
+        usage: /godmodeon
+    godmodeoff:
+        description: Disable godmode (Temporary fix for conflict with Essentials).
+        usage: /godmodeoff
+    zeus:
+        description: Strike lightning were you're looking.
+        usage: /zeus
+    gaia:
+        description: Beautify the earth with every step you take.
+        usage: /gaia
+    godpowers:
+        description: Displays avaliable commands.
+        usage: /godpowers
+    vulcan:
+        description: Goodness gracious, great balls of fire!
+        usage: /vulcan
+    myballsareonfire:
+        description: See vulcan.
+        usage: /myballsareonfire
