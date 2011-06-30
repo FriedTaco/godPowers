@@ -57,7 +57,7 @@ public class godPowersPlayerListener extends PlayerListener {
     public void onPlayerJoin(PlayerJoinEvent event) 
     {
     	Player player = event.getPlayer();
-    	if(godPowers.godModeOnLogin && ((godPowers.Permissions == null && player.isOp()) || godPowers.Permissions.has(player, "godPowers.godmodeOnLogin")))
+    	if(((godPowers.Permissions == null && player.isOp()) || godPowers.Permissions.has(player, "godPowers.godmodeOnLogin")) && godPowers.godModeOnLogin)
     	{
     		player.sendMessage("As you enter the world, you feel your godly powers returning.");
         	player.setDisplayName(godPowers.title + player.getDisplayName());
