@@ -14,7 +14,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
-
 import com.FriedTaco.taco.godPowers.Jesus;
 import com.FriedTaco.taco.godPowers.Jesus.*;
 
@@ -57,7 +56,7 @@ public class godPowersPlayerListener extends PlayerListener {
     public void onPlayerJoin(PlayerJoinEvent event) 
     {
     	Player player = event.getPlayer();
-    	if(((godPowers.Permissions == null && player.isOp()) || godPowers.Permissions.has(player, "godPowers.godmodeOnLogin")) && godPowers.godModeOnLogin)
+    	if(((godPowers.Permissions == null && player.isOp()) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.godmodeOnLogin")) && godPowers.godModeOnLogin))
     	{
     		player.sendMessage("As you enter the world, you feel your godly powers returning.");
         	player.setDisplayName(godPowers.title + player.getDisplayName());
