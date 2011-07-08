@@ -1,6 +1,6 @@
 name: godPowers
 main: com.FriedTaco.taco.godPowers.godPowers
-version: 2.0
+version: 2.2
 commands:
     godMode:
         description: Become invincible!
@@ -47,3 +47,6 @@ commands:
     myballsareonfire:
         description: See vulcan.
         usage: /myballsareonfire
+    demigod:
+        description: Reduces damage by an adjustable rate.
+        usage: /demigod

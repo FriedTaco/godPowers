@@ -45,6 +45,8 @@ package com.FriedTaco.taco.godPowers;
 		public static ArrayList<String> gaia = new ArrayList<String>();
 		public static ArrayList<String> isZeus = new ArrayList<String>();
 		public static ArrayList<String> isVulcan = new ArrayList<String>();
+		public static ArrayList<String> DemiGod = new ArrayList<String>();
+		public static double DemiModifier = 0;
 		public static boolean godModeOnLogin = true;
 		public static PermissionHandler Permissions;
 
@@ -69,12 +71,14 @@ package com.FriedTaco.taco.godPowers;
 	            FileWriter writer = null;
 	            try {
 	                writer = new FileWriter(dir + File.separator + "godPowers.properties");
-	                writer.write("God Powers v 2.0 configuration\r\n");
-	                writer.write("Settings should be self explanatory\r\n");
-	                writer.write("//This is a prefix for your name when you have godMode activated. Leave it blank if you don't want one.\r\n");
+	                writer.write("God Powers v 2.2 configuration\r\n");
+	                writer.write("#This is a prefix for your name when you have godMode activated. Leave it blank if you don't want one.\r\n");
 	                writer.write("godModeTitle=[God] \r\n");
-	                writer.write("//If set to false, nobody will be able to have godMode activated on login.\r\n");
+	                writer.write("#If set to false, nobody will be able to have godMode activated on login.\r\n");
 	                writer.write("godModeOnLogin=true\r\n");
+	                writer.write("#Determines what percentage of damage will be taken by players using DemiGod.\r\n");
+	                writer.write("#A setting of one will mean that they will take as much damage as usual, zero means no damage.\r\n");
+	                writer.write("DemiGodDamage=0.2\r\n");
 	                
 	                } catch (Exception e) {
 	                log.log(Level.SEVERE,
@@ -107,6 +111,7 @@ package com.FriedTaco.taco.godPowers;
 	        try {
 	          title = properties.getString("godModeTitle", "");
 	          godModeOnLogin = properties.getBoolean("godModeOnLogin", true);
+	          DemiModifier = properties.getDouble("DemiGodDamage", 0.2);
 	        } catch (Exception e) {
 	            log.log(Level.SEVERE,
 	                    "Exception while reading from godPowers.properties", e);
@@ -147,6 +152,12 @@ package com.FriedTaco.taco.godPowers;
 	    		System.out.println(message + "slay.");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "slay.");
+	    		try{
+	    			getCommand("smite").setExecutor(new SlayCommand(this));
+	    			System.out.println(message + "smite in place of slay.");
+	    		}catch(Exception e1){
+	    			System.out.println(error + "smite in place of slay.");
+	    		}
 	    	}try{
 	    		getCommand("maim").setExecutor(new MaimCommand(this));
 	    		System.out.println(message + "maim.");
@@ -187,6 +198,11 @@ package com.FriedTaco.taco.godPowers;
 		    	System.out.println(message + "vulcan.");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "vulcan.");
+	    	}try{
+		    	getCommand("demigod").setExecutor(new DemiGodCommand(this));
+		    	System.out.println(message + "demigod.");
+	    	} catch(Exception e) {
+	    		System.out.println(error + "demigod.");
 	    	}
 	    	//getCommand("heal").setExecutor(new HealCommand(this));
 	    	loadSettings();

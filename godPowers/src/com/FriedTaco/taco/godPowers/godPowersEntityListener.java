@@ -28,16 +28,18 @@ public class godPowersEntityListener extends EntityListener implements Cancellab
 			{
 				event.setCancelled(true);
 			}
-			else if(godPowers.burn.contains(player.getName()) && player.getHealth() <= 1)
+			else if(godPowers.burn.contains(player.getName()) && player.getHealth() <= event.getDamage())
 			{
 				godPowers.burn.remove(player.getName());
-				player.setHealth(0);
 				player.setFireTicks(0);
 			}
-			else if(godPowers.arrowKill.contains(player.getName()) && player.getHealth() <= 1)
+			else if(godPowers.arrowKill.contains(player.getName()) && player.getHealth() <= event.getDamage())
 			{
 				godPowers.arrowKill.remove(player.getName());
-				player.setHealth(0);
+			}
+			else if(godPowers.DemiGod.contains(player.getName()))
+			{
+				event.setDamage((int) (event.getDamage() * godPowers.DemiModifier));
 			}
 		}
     }
