@@ -46,8 +46,13 @@ package com.FriedTaco.taco.godPowers;
 		public static ArrayList<String> isZeus = new ArrayList<String>();
 		public static ArrayList<String> isVulcan = new ArrayList<String>();
 		public static ArrayList<String> DemiGod = new ArrayList<String>();
+		public static ArrayList<String> hades = new ArrayList<String>();
+		public static ArrayList<Integer> shovelDrops = new ArrayList<Integer>();
+		public static ArrayList<Integer> pickDrops = new ArrayList<Integer>();
+		public static ArrayList<Integer> axeDrops = new ArrayList<Integer>();
 		public static double DemiModifier = 0;
 		public static boolean godModeOnLogin = true;
+		public static boolean godTools = true;
 		public static PermissionHandler Permissions;
 
 	   
@@ -79,6 +84,8 @@ package com.FriedTaco.taco.godPowers;
 	                writer.write("#Determines what percentage of damage will be taken by players using DemiGod.\r\n");
 	                writer.write("#A setting of one will mean that they will take as much damage as usual, zero means no damage.\r\n");
 	                writer.write("DemiGodDamage=0.2\r\n");
+	                writer.write("#This enables/disables god tools.\r\n");
+	                writer.write("GodTools=true\r\n");
 	                
 	                } catch (Exception e) {
 	                log.log(Level.SEVERE,
@@ -112,6 +119,7 @@ package com.FriedTaco.taco.godPowers;
 	          title = properties.getString("godModeTitle", "");
 	          godModeOnLogin = properties.getBoolean("godModeOnLogin", true);
 	          DemiModifier = properties.getDouble("DemiGodDamage", 0.2);
+	          godTools = properties.getBoolean("GodTools", true);
 	        } catch (Exception e) {
 	            log.log(Level.SEVERE,
 	                    "Exception while reading from godPowers.properties", e);
@@ -203,6 +211,11 @@ package com.FriedTaco.taco.godPowers;
 		    	System.out.println(message + "demigod.");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "demigod.");
+	    	}try{
+	    		getCommand("hades").setExecutor(new HadesCommand(this));
+	    		System.out.println(message + "hades.");
+	    	} catch(Exception e) {
+	    		System.out.println(error + "hades.");
 	    	}
 	    	//getCommand("heal").setExecutor(new HealCommand(this));
 	    	loadSettings();
@@ -211,12 +224,41 @@ package com.FriedTaco.taco.godPowers;
 	        pm.registerEvent(Event.Type.PLAYER_QUIT, playerListener, Priority.Normal, this);
 	        pm.registerEvent(Event.Type.PLAYER_MOVE, playerListener, Priority.Normal, this);
 	        pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Priority.Highest, this);
-	        pm.registerEvent(Event.Type.PLAYER_ANIMATION, playerListener, Priority.Highest, this);
+	        pm.registerEvent(Event.Type.PLAYER_ANIMATION, playerListener, Priority.Normal, this);
+	        pm.registerEvent(Event.Type.PLAYER_INTERACT, playerListener, Priority.Normal, this);
 	        PluginDescriptionFile pdfFile = this.getDescription();
 	        System.out.println( pdfFile.getName() + " version " + pdfFile.getVersion() + " is enabled!" );
 	        setupPermissions();
+	        populateLists();
 	    }
-
+	    public void populateLists()
+	    {
+	    	shovelDrops.add(2);
+	    	shovelDrops.add(3);
+	    	shovelDrops.add(12);
+	    	shovelDrops.add(13);
+	    	shovelDrops.add(82);
+	    	pickDrops.add(1);
+	    	pickDrops.add(4);
+	    	pickDrops.add(14);
+	    	pickDrops.add(15);
+	    	pickDrops.add(16);
+	    	pickDrops.add(21);
+	    	pickDrops.add(22);
+	    	pickDrops.add(24);
+	    	pickDrops.add(41);
+	    	pickDrops.add(42);
+	    	pickDrops.add(43);
+	    	pickDrops.add(44);
+	    	pickDrops.add(45);
+	    	pickDrops.add(48);
+	    	pickDrops.add(49);
+	    	pickDrops.add(56);
+	    	pickDrops.add(57);
+	    	axeDrops.add(5);
+	    	axeDrops.add(17);
+	    	
+	    }
 	    public boolean isDebugging(final Player player) {
 	        if (debugees.containsKey(player)) {
 	            return debugees.get(player);

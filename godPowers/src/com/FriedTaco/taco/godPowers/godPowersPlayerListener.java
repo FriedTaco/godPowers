@@ -2,11 +2,14 @@ package com.FriedTaco.taco.godPowers;
 
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerAnimationEvent;
 import org.bukkit.event.player.PlayerAnimationType;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -174,6 +177,34 @@ public class godPowersPlayerListener extends PlayerListener {
 				}
 			}
 		}
+		if(godPowers.hades.contains(event.getPlayer().getName()) && event.getFrom().getBlock().getLocation().distance(event.getTo().getBlock().getLocation()) > 0)
+		{
+			for(int x=-2; x<=2; x++)
+			{
+				for(int z=-2; z<=2; z++)
+				{
+					Block block = event.getPlayer().getWorld().getBlockAt(event.getTo().getBlockX()+x, event.getTo().getBlockY()-1, event.getTo().getBlockZ()+z);
+					if(block.getTypeId() != 0 && block.getTypeId() != 8 && block.getTypeId() != 9)
+					{
+						double rand = Math.random();
+						if(x == 0 && z == 0)
+						{
+							if(rand < .5)
+								block.setTypeId(87);
+							else
+								block.setTypeId(88);
+						}
+						else
+						{
+							if(rand < .2)
+								block.setTypeId(87);
+							else if(rand > .2 && rand <= .4)
+								block.setTypeId(88);
+						}
+					}
+				}
+			}
+		}
     }
     private void plantStuff(Block block)
     {
@@ -208,7 +239,94 @@ public class godPowersPlayerListener extends PlayerListener {
     		if(godPowers.isVulcan.contains(event.getPlayer().getName()))
     			event.getPlayer().getWorld().spawn(event.getPlayer().getLocation().add(event.getPlayer().getLocation().getDirection().normalize().multiply(3).toLocation(event.getPlayer().getWorld(), event.getPlayer().getLocation().getYaw(), event.getPlayer().getLocation().getPitch())).add(0, 1D, 0), Fireball.class);
     	}
+    }
+    public void onPlayerInteract(PlayerInteractEvent event)
+    {
+    	if(godPowers.godTools && (godPowers.Permissions != null && godPowers.Permissions.has(event.getPlayer(), "godPowers.godtools") || godPowers.Permissions == null && event.getPlayer().isOp()))
+    	{
+			if(event.getAction() == Action.LEFT_CLICK_BLOCK && event.getItem() != null)
+			{
+				if(event.getItem().getTypeId() == 284 && godPowers.shovelDrops.contains(event.getClickedBlock().getTypeId()))
+				{
+					event.getItem().setDurability((short) 0);
+					event.getPlayer().getWorld().dropItemNaturally(event.getClickedBlock().getLocation(), new ItemStack(getDrop(event.getClickedBlock()), getAmount(event.getClickedBlock())));
+					event.getClickedBlock().setTypeId(0);
+				}
+				else if(event.getItem().getTypeId() == 285 && godPowers.pickDrops.contains(event.getClickedBlock().getTypeId()))
+				{
+					event.getItem().setDurability((short) 0);
+					if(event.getClickedBlock().getTypeId() == 21)
+					{
+						ItemStack item = new ItemStack(getDrop(event.getClickedBlock()), getAmount(event.getClickedBlock()));
+						item.setDurability((short) 4);
+						event.getPlayer().getWorld().dropItemNaturally(event.getClickedBlock().getLocation(), item);
+					}
+					else
+					{
+						event.getPlayer().getWorld().dropItemNaturally(event.getClickedBlock().getLocation(), new ItemStack(getDrop(event.getClickedBlock()), getAmount(event.getClickedBlock())));
+					}
+					event.useInteractedBlock();
+					event.getClickedBlock().setTypeId(0);					
+				}
+				else if(event.getItem().getTypeId() == 286 && godPowers.axeDrops.contains(event.getClickedBlock().getTypeId()))
+				{
+					event.getItem().setDurability((short) 0);
+					event.getPlayer().getWorld().dropItemNaturally(event.getClickedBlock().getLocation(), new ItemStack(getDrop(event.getClickedBlock()), getAmount(event.getClickedBlock())));
+					event.getClickedBlock().setTypeId(0);
+				}
+			}
+    	}
+    }
+    private int getDrop(Block block)
+    {
+    	if(block.getTypeId() == 1 || block.getTypeId() == 4)
+    	{
+    	    return 4;
+    	}
+    	else if(block.getTypeId() == 2 || block.getTypeId() == 3 || block.getTypeId() == 60)
+    	{
+    		return 3;
+    	}
+    	if(block.getTypeId() == 16)
+    	{
+    	    return 263;
+    	}
+    	if(block.getTypeId() == 21)
+    	{
+    	    return 351;
+    	}
+    	if(block.getTypeId() == 73 || block.getTypeId() == 74)
+    	{
+    	    return 331;
+    	}
+    	else if(block.getTypeId() == 18)
+    	{
+    		if(Math.random() < .1)
+    		{
+    			return 6;
+    		}
+    		else
+    		{
+    			return 0;
+    		}
+    	}
     	
+    	else
+    	{
+    		return block.getTypeId();
+    	}
+    }
+    public int getAmount(Block block)
+    {
+    	if(block.getTypeId() == 73 || block.getTypeId() == 74 || block.getTypeId() == 21)
+    	{
+    	    return (int)((Math.random()*10)%5);
+    	}
+    	else
+    	{
+    		return 1;
+    	}
+    		
     }
    }
 

@@ -50,3 +50,6 @@ commands:
     demigod:
         description: Reduces damage by an adjustable rate.
         usage: /demigod
+    hades:
+        description: Corrupts the world beneath your feet.
+        usage: /hades
