@@ -21,7 +21,7 @@ public class SuperJumpCommand implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.isOp()) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.superjump")) || player.getName().equalsIgnoreCase("FriedTaco"))
+    		if((godPowers.Permissions == null && player.hasPermission("godpowers.superjump")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.superjump")) || player.getName().equalsIgnoreCase("FriedTaco"))
     		{
 	    		if(godPowers.superJumper.contains(player.getName()))
 	    		{

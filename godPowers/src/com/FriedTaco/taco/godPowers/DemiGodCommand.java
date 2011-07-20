@@ -21,7 +21,7 @@ public class DemiGodCommand implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.isOp()) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.demigod")) || player.getName().equalsIgnoreCase("FriedTaco"))
+    		if((godPowers.Permissions == null && player.hasPermission("godpowers.demigod")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.demigod")) || player.getName().equalsIgnoreCase("FriedTaco"))
     		{
 	    		if(split.length == 0)
 	    		{

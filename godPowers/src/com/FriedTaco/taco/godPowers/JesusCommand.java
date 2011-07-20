@@ -25,7 +25,7 @@ public class JesusCommand implements CommandExecutor
     		player = (Player) sender;
         	Raft r = (Raft)Jesus.rafts.get(player.getName());
         	Jesus j = new Jesus();
-        	if((godPowers.Permissions == null && player.isOp()) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.jesus")) || player.getName().equalsIgnoreCase("FriedTaco"))
+        	if((godPowers.Permissions == null && player.hasPermission("godpowers.jesus")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.jesus")) || player.getName().equalsIgnoreCase("FriedTaco"))
     		{
 				if (r == null)
 				{

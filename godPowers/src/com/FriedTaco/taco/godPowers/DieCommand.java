@@ -22,7 +22,7 @@ public class DieCommand implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.isOp()) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.die")))
+    		if((godPowers.Permissions == null && player.hasPermission("godpowers.die")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.die")))
     		{
     			if(godPowers.godmodeEnabled.contains(player.getName()))
     			{

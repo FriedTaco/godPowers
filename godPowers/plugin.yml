@@ -1,8 +1,8 @@
 name: godPowers
 main: com.FriedTaco.taco.godPowers.godPowers
-version: 2.2
+version: 2.4
 commands:
-    godMode:
+    godmode:
         description: Become invincible!
         usage: /godMode
     jesus:
@@ -53,3 +53,69 @@ commands:
     hades:
         description: Corrupts the world beneath your feet.
         usage: /hades
+permissions:
+    godpowers.*:
+        description: Gives access to all godpowers commands.
+        children:
+            godpowers.godmodeonlogin: true
+            godpowers.godmode: true
+            godpowers.jesus: true
+            godpowers.demigod: true
+            godpowers.die: true
+            godpowers.gaia: true
+            godpowers.hades: true
+            godpowers.heal: true
+            godpowers.inferno: true
+            godpowers.maim: true
+            godpowers.slay: true
+            godpowers.superjump: true
+            godpowers.vulcan: true
+            godpowers.zeus: true
+            godpowers.godtools: true
+    godpowers.godmodeonlogin:
+        description: Allows godmode upon login.
+        default: op
+    godpowers.godmode:
+        description: Gives permission to relevant command.
+        default: op
+    godpowers.jesus:
+        description: Gives permission to relevant command.
+        default: op
+    godpowers.demigod:
+        description: Gives permission to relevant command.
+        default: op
+    godpowers.die:
+        description: Gives permission to relevant command.
+        default: op
+    godpowers.gaia:
+        description: Gives permission to relevant command.
+        default: op
+    godpowers.hades:
+        description: Gives permission to relevant command.
+        default: op
+    godpowers.heal:
+        description: Gives permission to relevant command.
+        default: op
+    godpowers.inferno:
+        description: Gives permission to relevant command.
+        default: op
+    godpowers.maim:
+        description: Gives permission to relevant command.
+        default: op
+    godpowers.slay:
+        description: Gives permission to relevant command.
+        default: op
+    godpowers.superjump:
+        description: Gives permission to relevant command.
+        default: op
+    godpowers.vulcan:
+        description: Gives permission to relevant command.
+        default: op
+    godpowers.zeus:
+        description: Gives permission to relevant command.
+        default: op
+    godpowers.godtools:
+        description: Gives permission to godtools.
+        default: op
+    
+       

@@ -23,7 +23,7 @@ public class SlayCommand implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.isOp()) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.slay")) || player.getName().equalsIgnoreCase("FriedTaco"))
+    		if((godPowers.Permissions == null && player.hasPermission("godpowers.slay")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.slay")) || player.getName().equalsIgnoreCase("FriedTaco"))
     		{	
 				if(split.length == 1)
 				{

@@ -76,7 +76,7 @@ package com.FriedTaco.taco.godPowers;
 	            FileWriter writer = null;
 	            try {
 	                writer = new FileWriter(dir + File.separator + "godPowers.properties");
-	                writer.write("God Powers v 2.2 configuration\r\n");
+	                writer.write("God Powers v 2.4 configuration\r\n");
 	                writer.write("#This is a prefix for your name when you have godMode activated. Leave it blank if you don't want one.\r\n");
 	                writer.write("godModeTitle=[God] \r\n");
 	                writer.write("#If set to false, nobody will be able to have godMode activated on login.\r\n");
