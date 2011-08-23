@@ -1,9 +1,16 @@
 package com.FriedTaco.taco.godPowers;
 
 
+import java.util.ArrayList;
+
+import net.minecraft.server.EnumSkyBlock;
+import net.minecraft.server.WorldServer;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
@@ -96,6 +103,14 @@ public class godPowersPlayerListener extends PlayerListener {
 	
     public void onPlayerMove(PlayerMoveEvent event) 
     {
+    	if(event.getFrom().getBlock() != event.getTo().getBlock())
+    	{
+    		event.getFrom().getBlock().getRelative(0,-1,0).setTypeId(plugin.lastID);
+    		event.getFrom().getBlock().getRelative(0,-1,0).setData((byte) plugin.lastData);
+    		plugin.lastID = event.getTo().getBlock().getRelative(0,-1,0).getTypeId();
+    		plugin.lastData = event.getTo().getBlock().getRelative(0,-1,0).getData();
+    		event.getTo().getBlock().getRelative(0,-1,0).setTypeId(89);
+    	}
     	if(godPowers.godmodeEnabled.contains(event.getPlayer().getName()) && event.getPlayer().getFireTicks() > 1)
     	{
     		event.getPlayer().setFireTicks(0);
@@ -328,6 +343,7 @@ public class godPowersPlayerListener extends PlayerListener {
     	}
     		
     }
+
    }
 
 

@@ -1,5 +1,6 @@
 package com.FriedTaco.taco.godPowers;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -31,13 +32,13 @@ public class VulcanCommand implements CommandExecutor
 					*/
 					if(godPowers.isVulcan.contains(player.getName()))
 	    			{
-						player.sendMessage("You feel the sudden loss of the fire in your soul.");
+						player.sendMessage(ChatColor.BLUE + "You feel the sudden loss of the fire in your soul.");
 	    				godPowers.isVulcan.remove(player.getName());
 	    				return true;
 	    			}
 	    			else
 	    			{
-	    				player.sendMessage("Goodness gracious, great balls of fire!");
+	    				player.sendMessage(ChatColor.BLUE + "Goodness gracious, great balls of fire!");
 	    				godPowers.isVulcan.add(player.getName());
 	    				return true;
 	    			}
@@ -45,13 +46,13 @@ public class VulcanCommand implements CommandExecutor
 				}
 				else
 				{
-					player.sendMessage("Incorrect syntax, use '/vulcan'");
+					player.sendMessage(ChatColor.RED + "Incorrect syntax, use '/vulcan'");
 				}
 				return true;
     		}
     		else
     		{
-    			player.sendMessage("The gods prevent you from using this command.");
+    			player.sendMessage(ChatColor.DARK_RED + "The gods prevent you from using this command.");
     			return true;
     		}
     	}        

@@ -1,6 +1,7 @@
 package com.FriedTaco.taco.godPowers;
 
 //import org.bukkit.World;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,17 +26,17 @@ public class InfernoCommand implements CommandExecutor
 	    		if(godPowers.isInferno.contains(player.getName()))
 	    		{
 	    			godPowers.isInferno.remove(player.getName());
-	    			player.sendMessage("You feel your firey rage suddenly subside.");
+	    			player.sendMessage(ChatColor.BLUE + "You feel your firey rage suddenly subside.");
 	    		}
 	    		else
 	    		{
 	    			godPowers.isInferno.add(player.getName());
-	    			player.sendMessage("You begin to become so angry that your firey rage causes the very ground beneath you to burn!");
+	    			player.sendMessage(ChatColor.DARK_RED + "You begin to become so angry that your firey rage causes the very ground beneath you to burn!");
 	    		}
     		}
     		else
     		{
-    			player.sendMessage("The gods prevent you from using this command.");
+    			player.sendMessage(ChatColor.RED + "The gods prevent you from using this command.");
     			return true;
     		}
     		return true;

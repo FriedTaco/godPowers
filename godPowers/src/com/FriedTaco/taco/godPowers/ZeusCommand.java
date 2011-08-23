@@ -1,5 +1,6 @@
 package com.FriedTaco.taco.godPowers;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,21 +26,25 @@ public class ZeusCommand implements CommandExecutor
     		{
     			if(split.length > 0)
     			{
-    				player.sendMessage("Incorrect syntax. Correct usage: '/zeus'");
+    				player.sendMessage(ChatColor.RED + "Incorrect syntax. Correct usage: '/zeus'");
     				return true;
     			}
     			if(godPowers.isZeus.contains(player.getName()))
     			{
-    				player.sendMessage("You feel a sudden loss of your Zeus-like abilities.");
+    				player.sendMessage(ChatColor.BLUE + "You feel a sudden loss of your Zeus-like abilities.");
     				godPowers.isZeus.remove(player.getName());
     				return true;
     			}
     			else
     			{
-    				player.sendMessage("You feel like you can strike lightning down from the heavens with a swing of your arm!");
+    				player.sendMessage(ChatColor.BLUE + "You feel like you can strike lightning down from the heavens with a swing of your arm!");
     				godPowers.isZeus.add(player.getName());
     				return true;
     			}
+    		}
+    		else
+    		{
+    			player.sendMessage(ChatColor.DARK_RED + "The gods prevent you from using this command.");
     		}
     	}
 		return false;

@@ -1,6 +1,7 @@
 package com.FriedTaco.taco.godPowers;
 
 //import org.bukkit.World;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,7 +26,7 @@ public class HealCommand implements CommandExecutor
     		{
 	    		if(split.length==0)
 				{
-	        		player.sendMessage("Thou hath been healed! Huzzah!");
+	        		player.sendMessage(ChatColor.BLUE + "Thou hath been healed! Huzzah!");
 	        		player.setHealth(20);
 	        		return true;
 				}
@@ -34,17 +35,17 @@ public class HealCommand implements CommandExecutor
 	        		Player targetPlayer = plugin.getServer().getPlayer(split[0]);
 	        		if(targetPlayer==null) 
 					{
-						player.sendMessage("The user "+split[0]+" does not exist or is not currently logged in.");
+						player.sendMessage(ChatColor.BLUE + "The user "+split[0]+" does not exist or is not currently logged in.");
 					}
 					if(targetPlayer == player)
 					{
-						player.sendMessage("To heal yourself, just type '/heal'");
+						player.sendMessage(ChatColor.RED + "To heal yourself, just type '/heal'");
 	
 					}
 					else
 					{
-						player.sendMessage(targetPlayer.getName() + " has been healed.");
-						targetPlayer.sendMessage(player.getName() + " has healed you! Huzzah!");	
+						player.sendMessage(ChatColor.BLUE + targetPlayer.getName() + " has been healed.");
+						targetPlayer.sendMessage(ChatColor.BLUE + player.getName() + " has healed you! Huzzah!");	
 						targetPlayer.setHealth(20);
 					}
 					return true;
@@ -52,7 +53,7 @@ public class HealCommand implements CommandExecutor
     		}
     		else
     		{
-    			player.sendMessage("The gods prevent you from using this command.");
+    			player.sendMessage(ChatColor.DARK_RED + "The gods prevent you from using this command.");
      			return true;
     		}
     	}       

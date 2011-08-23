@@ -1,6 +1,7 @@
 package com.FriedTaco.taco.godPowers;
 
 //import org.bukkit.World;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -28,13 +29,13 @@ public class DemiGodCommand implements CommandExecutor
 	    			if(godPowers.DemiGod.contains(player.getName()))
 	    			{
 	    				godPowers.DemiGod.remove(player.getName());
-	    				player.sendMessage("You have returned to being mortal.");
+	    				player.sendMessage(ChatColor.BLUE + "You have returned to being mortal.");
 	    				return true;
 	    			}
 	    			else
 	    			{
-	    				player.sendMessage("The gods have shared their might with you.");
-	    				player.sendMessage("You now feel as if fatal wounds are like mere scratches to you!");
+	    				player.sendMessage(ChatColor.BLUE + "The gods have shared their might with you.");
+	    				player.sendMessage(ChatColor.BLUE + "You now feel as if fatal wounds are like mere scratches to you!");
 	    				godPowers.DemiGod.add(player.getName());
 	    				player.setHealth(20);
 	    				return true;
@@ -45,11 +46,11 @@ public class DemiGodCommand implements CommandExecutor
 	    			Player targetPlayer = plugin.getServer().getPlayer(split[0]);
 	    			if(targetPlayer==null) 
 					{
-						player.sendMessage("The user "+split[0]+" does not exist or is not currently logged in.");
+						player.sendMessage(ChatColor.RED + "The user "+split[0]+" does not exist or is not currently logged in.");
 					}
 	    			else if(targetPlayer == player)
 					{
-						player.sendMessage("Please use '/demigod' to make yourself a demigod.");
+						player.sendMessage(ChatColor.RED + "Please use '/demigod' to make yourself a demigod.");
 	
 					}
 					else
@@ -57,16 +58,16 @@ public class DemiGodCommand implements CommandExecutor
 						if(godPowers.DemiGod.contains(targetPlayer.getName()))
 	        			{
 	        				godPowers.DemiGod.remove(targetPlayer.getName());
-	        				targetPlayer.sendMessage(player.getName() + " has returned you to being mortal.");
-	        				player.sendMessage(targetPlayer.getName() + " has been returned to being mortal.");
+	        				targetPlayer.sendMessage(ChatColor.BLUE + player.getName() + " has returned you to being mortal.");
+	        				player.sendMessage(ChatColor.BLUE + targetPlayer.getName() + " has been returned to being mortal.");
 	        			}
 	        			else
 	            		{
-	        				targetPlayer.sendMessage(player.getName() + " has blessed you with god-like strength!");
-	        				targetPlayer.sendMessage("You now feel as if fatal wounds are like mere scratches to you!");
+	        				targetPlayer.sendMessage(ChatColor.BLUE + player.getName() + " has blessed you with god-like strength!");
+	        				targetPlayer.sendMessage(ChatColor.BLUE + "You now feel as if fatal wounds are like mere scratches to you!");
 	            			godPowers.DemiGod.add(targetPlayer.getName());
 	            			targetPlayer.setHealth(20);
-	            			player.sendMessage(targetPlayer.getName() + " is now a demigod.");
+	            			player.sendMessage(ChatColor.BLUE + targetPlayer.getName() + " is now a demigod.");
 	            		}
 					}
 					return true;
@@ -74,7 +75,7 @@ public class DemiGodCommand implements CommandExecutor
     		}
     		else
     		{
-    			player.sendMessage("The gods prevent you from using this command.");
+    			player.sendMessage(ChatColor.DARK_RED + "The gods prevent you from using this command.");
     			return true;
     		}
     	}        

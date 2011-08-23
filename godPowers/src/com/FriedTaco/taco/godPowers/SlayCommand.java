@@ -1,6 +1,7 @@
 package com.FriedTaco.taco.godPowers;
 
 //import org.bukkit.World;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -30,18 +31,18 @@ public class SlayCommand implements CommandExecutor
 					targetPlayer = plugin.getServer().getPlayer(split[0]);
 					if(targetPlayer==null) 
 					{
-						player.sendMessage("The user "+split[0]+" does not exist or is not currently logged in.");
+						player.sendMessage(ChatColor.RED + "The user "+split[0]+" does not exist or is not currently logged in.");
 					}
 					else if(godPowers.godmodeEnabled.contains(targetPlayer.getName()))
 					{
-						player.sendMessage("Fool! You cannot kill a god!");
+						player.sendMessage(ChatColor.RED + "Fool! You cannot kill a god!");
 					}
 					else
 					{
 						targetPlayer.setHealth(0);
 						godPowers.dropDeadItems(targetPlayer);
-						player.sendMessage("You have slain " + targetPlayer.getName() + ".");
-						targetPlayer.sendMessage("By the will of " + player.getName() + ", you have died.");
+						player.sendMessage("ChatColor.BLUE + You have slain " + targetPlayer.getName() + ".");
+						targetPlayer.sendMessage(ChatColor.BLUE + "By the will of " + player.getName() + ", you have died.");
 							
 					}
 				
@@ -57,7 +58,7 @@ public class SlayCommand implements CommandExecutor
 					}
 					else if(targetPlayer==null) 
 					{
-						player.sendMessage("The user "+split[0]+" does not exist or is not currently logged in.");
+						player.sendMessage(ChatColor.RED + "The user "+split[0]+" does not exist or is not currently logged in.");
 						return true;
 					}
 					if(split[1].equalsIgnoreCase("a") || split[1].equalsIgnoreCase("arrows"))
@@ -72,38 +73,38 @@ public class SlayCommand implements CommandExecutor
 								else if(x > 4)
 									break;
 						}
-						player.sendMessage("You slay " + targetPlayer.getName() + " with a volley of arrows!");
+						player.sendMessage(ChatColor.BLUE + "You slay " + targetPlayer.getName() + " with a volley of arrows!");
 							godPowers.arrowKill.add(targetPlayer.getName());
 					}
 					else if(split[1].equalsIgnoreCase("f") || split[1].equalsIgnoreCase("fire"))
 					{
-						player.sendMessage("You ignite " + targetPlayer.getName() + " for your amusement.");
+						player.sendMessage(ChatColor.BLUE + "You ignite " + targetPlayer.getName() + " for your amusement.");
 						targetPlayer.setFireTicks(500);
-						targetPlayer.sendMessage("The gods have lit you on fire for their amusement.");
+						targetPlayer.sendMessage(ChatColor.BLUE + "The gods have lit you on fire for their amusement.");
 						godPowers.burn.add(targetPlayer.getName());
 					}
 					else if(split[1].equalsIgnoreCase("d") || split[1].equalsIgnoreCase("drop"))
 					{
-						player.sendMessage("You drop " + targetPlayer.getName() + " from the heavens and watch them plummet to their doom.");
+						player.sendMessage(ChatColor.BLUE + "You drop " + targetPlayer.getName() + " from the heavens and watch them plummet to their doom.");
 						targetPlayer.teleport(new Location(world, targetPlayer.getLocation().getX(), 1000, targetPlayer.getLocation().getZ()));
-						targetPlayer.sendMessage("The gods drop you from the heavens.");
+						targetPlayer.sendMessage(ChatColor.BLUE + "The gods drop you from the heavens.");
 					}
 					else if(split[1].equalsIgnoreCase("l") || split[1].equalsIgnoreCase("lightning"))
 					{
-						player.sendMessage("You strike " + targetPlayer.getName() + " with a bolt of lightning!");
+						player.sendMessage(ChatColor.BLUE + "You strike " + targetPlayer.getName() + " with a bolt of lightning!");
 						player.getWorld().strikeLightning(targetPlayer.getLocation());
 					}
 					return true;
 				}
 				else
 				{
-					player.sendMessage("Incorrect syntax, use '/slay [playerName]'");
+					player.sendMessage(ChatColor.RED + "Incorrect syntax, use '/slay [playerName]'");
 					return true;
 				}
     		}
     		else
     		{
-    			player.sendMessage("The gods prevent you from using this command.");
+    			player.sendMessage(ChatColor.DARK_RED + "The gods prevent you from using this command.");
     			return true;
     		}
     	}        

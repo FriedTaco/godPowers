@@ -1,6 +1,7 @@
 package com.FriedTaco.taco.godPowers;
 
 //import org.bukkit.World;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,14 +30,14 @@ public class JesusCommand implements CommandExecutor
     		{
 				if (r == null)
 				{
-					player.sendMessage("You feel as if you can walk on water, just like Jesus!");
+					player.sendMessage(ChatColor.BLUE + "You feel as if you can walk on water, just like Jesus!");
 					godPowers.isJesus.add(player.getName());
 					Jesus.rafts.put(player.getName(), j.new Raft());
 					return true;
 				}
 				else
 				{
-					player.sendMessage("You feel your Jesus-like powers draining from you.");
+					player.sendMessage(ChatColor.BLUE + "You feel your Jesus-like powers draining from you.");
 					Jesus.rafts.remove(player.getName());
 					godPowers.isJesus.remove(player.getName());
 					r.destroyJesusRaft(player);
@@ -45,7 +46,7 @@ public class JesusCommand implements CommandExecutor
     		}
 			else
 			{
-				player.sendMessage("The gods prevent you from using this command.");
+				player.sendMessage(ChatColor.DARK_RED + "The gods prevent you from using this command.");
     			return true;
 			}
     	}        

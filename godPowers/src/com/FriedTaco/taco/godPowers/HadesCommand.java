@@ -1,5 +1,6 @@
 package com.FriedTaco.taco.godPowers;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,25 +26,25 @@ public class HadesCommand implements CommandExecutor
 				{
 					if(godPowers.hades.contains(player.getName()))
 					{
-						player.sendMessage("You no longer corrupt the ground you walk on.");
+						player.sendMessage(ChatColor.DARK_RED + "You no longer corrupt the ground you walk on.");
 						godPowers.hades.remove(player.getName());
 					}
 					else
 					{
-						player.sendMessage("The fires of the nether begin to corse through your veins.");
+						player.sendMessage(ChatColor.DARK_RED + "The fires of the nether begin to corse through your veins.");
 						godPowers.hades.add(player.getName());
 					}
 					return true;
 				}
 				else
 				{
-					player.sendMessage("Incorrect syntax, use '/hades'");
+					player.sendMessage(ChatColor.RED + "Incorrect syntax, use '/hades'");
 					return true;
 				}
     		}
     		else
     		{
-    			player.sendMessage("The gods prevent you from using this command.");
+    			player.sendMessage(ChatColor.DARK_RED + "The gods prevent you from using this command.");
     			return true;
     		}
     	}        

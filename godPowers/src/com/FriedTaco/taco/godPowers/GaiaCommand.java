@@ -1,5 +1,6 @@
 package com.FriedTaco.taco.godPowers;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,25 +26,25 @@ public class GaiaCommand implements CommandExecutor
 				{
 					if(godPowers.gaia.contains(player.getName()))
 					{
-						player.sendMessage("The earth no longer rejuvenates with your every step.");
+						player.sendMessage(ChatColor.DARK_GREEN + "The earth no longer rejuvenates with your every step.");
 						godPowers.gaia.remove(player.getName());
 					}
 					else
 					{
-						player.sendMessage("The essence of life spreads from you, rejuvenating the world around you.");
+						player.sendMessage(ChatColor.DARK_GREEN + "The essence of life spreads from you, rejuvenating the world around you.");
 						godPowers.gaia.add(player.getName());
 					}
 					return true;
 				}
 				else
 				{
-					player.sendMessage("Incorrect syntax, use '/gaia'");
+					player.sendMessage(ChatColor.RED + "Incorrect syntax, use '/gaia'");
 					return true;
 				}
     		}
     		else
     		{
-    			player.sendMessage("The gods prevent you from using this command.");
+    			player.sendMessage(ChatColor.DARK_RED + "The gods prevent you from using this command.");
     			return true;
     		}
     	}        

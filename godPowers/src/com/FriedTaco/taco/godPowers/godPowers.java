@@ -24,7 +24,7 @@ package com.FriedTaco.taco.godPowers;
 	import com.nijiko.permissions.PermissionHandler;
 	import com.nijikokun.bukkit.Permissions.Permissions;
 	import org.bukkit.plugin.Plugin;
-	import org.bukkit.util.Vector;
+import org.bukkit.util.Vector;
 
 
 
@@ -50,7 +50,9 @@ package com.FriedTaco.taco.godPowers;
 		public static ArrayList<Integer> shovelDrops = new ArrayList<Integer>();
 		public static ArrayList<Integer> pickDrops = new ArrayList<Integer>();
 		public static ArrayList<Integer> axeDrops = new ArrayList<Integer>();
+		public HashMap<String,String> list = new HashMap<String,String>();
 		public static double DemiModifier = 0;
+		public int lastID,lastData;
 		public static boolean godModeOnLogin = true;
 		public static boolean godTools = true;
 		public static PermissionHandler Permissions;
@@ -135,11 +137,13 @@ package com.FriedTaco.taco.godPowers;
 	    	try{
 	    		getCommand("zeus").setExecutor(new ZeusCommand(this));
 	    		System.out.println(message + "zeus.");
+	    		list.put("zeus", "- Strike lightning with a swing of your arm!");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "zeus.");
 	    	}try{
 	    		getCommand("godmode").setExecutor(new godModeCommand(this));
 	    		System.out.println(message + "godmode.");
+	    		list.put("godmode", "<Player> - Toggles godmode on and off.");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "godmode.");
 	    	}
@@ -148,72 +152,86 @@ package com.FriedTaco.taco.godPowers;
 	    	try{
 	    		getCommand("jesus").setExecutor(new JesusCommand(this));
 	    		System.out.println(message + "jesus.");
+	    		list.put("jesus", "<Player> - Allows you to walk on water and lava");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "jesus.");
 	    	}try{
 	    		getCommand("die").setExecutor(new DieCommand(this));
 	    		System.out.println(message + "die.");
+	    		list.put("die", "- Causes you to die.");
 	    	} catch(Exception e) {
-	    		System.out.println(error + "zeus.");
+	    		System.out.println(error + "die.");
 	    	}try{
 	    		getCommand("slay").setExecutor(new SlayCommand(this));
 	    		System.out.println(message + "slay.");
+	    		list.put("slay", "[Player] <arrows/fire/drop> - Kills a player with/without the optional method.");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "slay.");
 	    		try{
 	    			getCommand("smite").setExecutor(new SlayCommand(this));
 	    			System.out.println(message + "smite in place of slay.");
+	    			list.put("smite", "[Player] <arrows/fire/drop> - Kills a player with/without the optional method.");
 	    		}catch(Exception e1){
 	    			System.out.println(error + "smite in place of slay.");
 	    		}
 	    	}try{
 	    		getCommand("maim").setExecutor(new MaimCommand(this));
 	    		System.out.println(message + "maim.");
+	    		list.put("maim", "[Player] - Beat a player within an inch of their life!");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "maim.");
 	    	}try{
 	    		getCommand("inferno").setExecutor(new InfernoCommand(this));
 		    	System.out.println(message + "inferno.");
+		    	list.put("inferno", "- Creates a trail of fire behind you.");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "inferno.");
 	    	}try{
 		    	getCommand("superjump").setExecutor(new SuperJumpCommand(this));
 		    	System.out.println(message + "superjump.");
+		    	list.put("superjump", "- Be able to leap tall building in a single bound!");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "superjump.");
 	    	}try{
 		    	getCommand("gaia").setExecutor(new GaiaCommand(this));
 		    	System.out.println(message + "gaia.");
+		    	list.put("gaia", "- Sprouts grass and flowers wherever you step.");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "gaia.");
 	    	}try{
 		    	getCommand("heal").setExecutor(new HealCommand(this));
 		    	System.out.println(message + "heal.");
+		    	list.put("heal", "<Player> - Heals either you or the specified player.");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "heal.");
 	    	}try{
 		    	getCommand("godpowers").setExecutor(new commands(this));
 		    	System.out.println(message + "godpowers.");
+		    	list.put("godpowers", "- Displays this message.");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "godpowers. How dare they!");
 	    	}try{
 		    	getCommand("vulcan").setExecutor(new VulcanCommand(this));
 		    	System.out.println(message + "vulcan.");
+		    	list.put("vulcan", "- Fling fireballs at those pesky mortals!");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "vulcan.");
 	    	}try{
 		    	getCommand("myballsareonfire").setExecutor(new VulcanCommand(this));
 		    	System.out.println(message + "vulcan.");
+		    	list.put("myballsareonfire", "- See vulcan.");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "vulcan.");
 	    	}try{
 		    	getCommand("demigod").setExecutor(new DemiGodCommand(this));
 		    	System.out.println(message + "demigod.");
+		    	list.put("demigod", "- Allows you to take a small fraction of the damage you'd normally take.");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "demigod.");
 	    	}try{
 	    		getCommand("hades").setExecutor(new HadesCommand(this));
 	    		System.out.println(message + "hades.");
+	    		list.put("hades", "- Corrupt the world as you walk through it.");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "hades.");
 	    	}

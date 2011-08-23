@@ -1,6 +1,7 @@
 package com.FriedTaco.taco.godPowers;
 
 //import org.bukkit.World;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,29 +30,29 @@ public class MaimCommand implements CommandExecutor
 					Player targetPlayer = plugin.getServer().getPlayer(split[0]);
 					if(targetPlayer==null) 
 					{
-						player.sendMessage("The user "+split[0]+" does not exist or is not currently logged in.");
+						player.sendMessage(ChatColor.RED + "The user "+split[0]+" does not exist or is not currently logged in.");
 					}
 					else if(godPowers.godmodeEnabled.contains(targetPlayer.getName()))
 					{
-						player.sendMessage("Fool! You cannot maim a god!");
+						player.sendMessage(ChatColor.RED + "Fool! You cannot maim a god!");
 					}
 					else
 					{
 						targetPlayer.setHealth(2);
-						player.sendMessage("You viciously beat " + targetPlayer.getName() + " within an inch of thier life.");
-						targetPlayer.sendMessage(player.getName() + " has beaten you within an inch of your life!");
+						player.sendMessage(ChatColor.BLUE + "You viciously beat " + targetPlayer.getName() + " within an inch of thier life.");
+						targetPlayer.sendMessage(ChatColor.BLUE + player.getName() + " has beaten you within an inch of your life!");
 					}
 					return true;
 				}
 				else
 				{
-					player.sendMessage("Incorrect syntax, use '/maim [playerName]'");
+					player.sendMessage(ChatColor.RED + "Incorrect syntax, use '/maim [playerName]'");
 					return true;
 				}
     		}
     		else
     		{
-    			player.sendMessage("The gods prevent you from using this command.");
+    			player.sendMessage(ChatColor.DARK_RED + "The gods prevent you from using this command.");
     			return true;
     		}
     	}        
