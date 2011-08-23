@@ -103,6 +103,7 @@ public class godPowersPlayerListener extends PlayerListener {
 	
     public void onPlayerMove(PlayerMoveEvent event) 
     {
+    	/*
     	if(event.getFrom().getBlock() != event.getTo().getBlock())
     	{
     		event.getFrom().getBlock().getRelative(0,-1,0).setTypeId(plugin.lastID);
@@ -111,6 +112,7 @@ public class godPowersPlayerListener extends PlayerListener {
     		plugin.lastData = event.getTo().getBlock().getRelative(0,-1,0).getData();
     		event.getTo().getBlock().getRelative(0,-1,0).setTypeId(89);
     	}
+    	*/
     	if(godPowers.godmodeEnabled.contains(event.getPlayer().getName()) && event.getPlayer().getFireTicks() > 1)
     	{
     		event.getPlayer().setFireTicks(0);
