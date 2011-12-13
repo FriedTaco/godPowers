@@ -53,6 +53,9 @@ commands:
     hades:
         description: Corrupts the world beneath your feet.
         usage: /hades
+    bless:
+        description: Corrupts the world beneath your feet.
+        usage: /bless
 permissions:
     godpowers.*:
         description: Gives access to all godpowers commands.
@@ -72,6 +75,7 @@ permissions:
             godpowers.vulcan: true
             godpowers.zeus: true
             godpowers.godtools: true
+            godpowers.bless: true
     godpowers.godmodeonlogin:
         description: Allows godmode upon login.
         default: op
@@ -116,6 +120,9 @@ permissions:
         default: op
     godpowers.godtools:
         description: Gives permission to godtools.
+        default: op
+    godpowers.bless:
+        description: Gives permission to relevant command.
         default: op
     
        

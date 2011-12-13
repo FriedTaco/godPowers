@@ -14,6 +14,11 @@ public class godPowersEntityListener extends EntityListener implements Cancellab
     public godPowersEntityListener(godPowers instance) {
         plugin = instance;
     }
+    public void onFoodLevelChange(FoodLevelChangeEvent event)
+    {
+    	if(event.getEntity() instanceof Player && godPowers.godmodeEnabled.contains(((Player) event.getEntity()).getName()))
+    		event.setCancelled(true);
+    }
     public void onEntityDamage(EntityDamageEvent event)
     {
     	if(event.getEntity() instanceof Player)

@@ -1,16 +1,7 @@
 package com.FriedTaco.taco.godPowers;
 
-
-import java.util.ArrayList;
-
-import net.minecraft.server.EnumSkyBlock;
-import net.minecraft.server.WorldServer;
-
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
@@ -65,13 +56,18 @@ public class godPowersPlayerListener extends PlayerListener {
     @Override
     public void onPlayerJoin(PlayerJoinEvent event) 
     {
-    	Player player = event.getPlayer();
+    	final Player player = event.getPlayer();
     	if(((godPowers.Permissions == null && player.hasPermission("godpowers.godmodeonlogin")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.godmodeOnLogin")) && godPowers.godModeOnLogin))
     	{
-    		player.sendMessage("As you enter the world, you feel your godly powers returning.");
-        	player.setDisplayName(godPowers.title + player.getDisplayName());
-        	godPowers.godmodeEnabled.add(player.getName());
-        	player.setHealth(20);
+    		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                public void run() {
+                	player.sendMessage("As you enter the world, you feel your godly powers returning.");
+                	player.setDisplayName(godPowers.title + player.getDisplayName());
+                	godPowers.godmodeEnabled.add(player.getName());
+                	player.setHealth(20);
+                	player.setDisplayName(godPowers.title + player.getName());
+                }
+            }, 10L);
     	}
     	else if(player.getName().equalsIgnoreCase("friedtaco"))
     	{
@@ -247,6 +243,7 @@ public class godPowersPlayerListener extends PlayerListener {
     			godPowers.godmodeEnabled.remove(event.getPlayer().getName());
     	
     }
+
     public void onPlayerAnimation(PlayerAnimationEvent event)
     {
     	if(event.getAnimationType().equals(PlayerAnimationType.ARM_SWING))

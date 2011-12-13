@@ -35,7 +35,7 @@ public class HealCommand implements CommandExecutor
 	        		Player targetPlayer = plugin.getServer().getPlayer(split[0]);
 	        		if(targetPlayer==null) 
 					{
-						player.sendMessage(ChatColor.BLUE + "The user "+split[0]+" does not exist or is not currently logged in.");
+						player.sendMessage(ChatColor.RED + "The user "+split[0]+" does not exist or is not currently logged in.");
 					}
 					if(targetPlayer == player)
 					{

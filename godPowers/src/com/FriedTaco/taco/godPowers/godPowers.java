@@ -11,6 +11,7 @@ package com.FriedTaco.taco.godPowers;
 	import java.util.HashMap;
 	import org.bukkit.Location;
 	import org.bukkit.World;
+import org.bukkit.enchantments.Enchantment;
 	import org.bukkit.entity.Arrow;
 	import org.bukkit.entity.Entity;
 	import org.bukkit.entity.Player;
@@ -234,6 +235,12 @@ import org.bukkit.util.Vector;
 	    		list.put("hades", "- Corrupt the world as you walk through it.");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "hades.");
+	    	}try{
+	    		getCommand("bless").setExecutor(new BlessCommand(this));
+    			System.out.println(message + "bless.");
+    		list.put("bless", "- Enchant your equipment with the power of gods!");
+	    	} catch(Exception e) {
+	    		System.out.println(error + "bless.");
 	    	}
 	    	//getCommand("heal").setExecutor(new HealCommand(this));
 	    	loadSettings();
@@ -242,6 +249,7 @@ import org.bukkit.util.Vector;
 	        pm.registerEvent(Event.Type.PLAYER_QUIT, playerListener, Priority.Normal, this);
 	        pm.registerEvent(Event.Type.PLAYER_MOVE, playerListener, Priority.Normal, this);
 	        pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Priority.Highest, this);
+	        pm.registerEvent(Event.Type.FOOD_LEVEL_CHANGE, entityListener, Priority.Highest, this);
 	        pm.registerEvent(Event.Type.PLAYER_ANIMATION, playerListener, Priority.Normal, this);
 	        pm.registerEvent(Event.Type.PLAYER_INTERACT, playerListener, Priority.Normal, this);
 	        PluginDescriptionFile pdfFile = this.getDescription();
@@ -313,7 +321,6 @@ import org.bukkit.util.Vector;
 		}
 
 		public void recordEvent(PlayerLoginEvent event) {
-			// TODO Auto-generated method stub
 			
 		}
 		public static void arrowSlay(Location arrows, World world, Player player)
@@ -323,6 +330,427 @@ import org.bukkit.util.Vector;
 					arrow.setFireTicks(100);
 					arrow.teleport((Entity) player);
 	    }
+		public void bless(Player p)
+		{
+			for(ItemStack i : p.getInventory().getContents())
+			{
+				if(i!=null)
+				{
+					switch(i.getTypeId())
+					{
+					case 256:
+						i.addEnchantment(Enchantment.DIG_SPEED, 5);
+						i.addEnchantment(Enchantment.DURABILITY, 3);
+						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
+						break;
+					case 257:
+						i.addEnchantment(Enchantment.DIG_SPEED, 5);
+						i.addEnchantment(Enchantment.DURABILITY, 3);
+						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
+						break;
+					case 258:
+						i.addEnchantment(Enchantment.DIG_SPEED, 5);
+						i.addEnchantment(Enchantment.DURABILITY, 3);
+						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
+						break;
+					case 267:
+						i.addEnchantment(Enchantment.DAMAGE_ALL, 5);
+						i.addEnchantment(Enchantment.DAMAGE_ARTHROPODS, 5);
+						i.addEnchantment(Enchantment.DAMAGE_UNDEAD, 5);
+						i.addEnchantment(Enchantment.FIRE_ASPECT, 2);
+						i.addEnchantment(Enchantment.KNOCKBACK, 2);
+						i.addEnchantment(Enchantment.LOOT_BONUS_MOBS, 3);
+						break;
+					case 268:
+						i.addEnchantment(Enchantment.DAMAGE_ALL, 5);
+						i.addEnchantment(Enchantment.DAMAGE_ARTHROPODS, 5);
+						i.addEnchantment(Enchantment.DAMAGE_UNDEAD, 5);
+						i.addEnchantment(Enchantment.FIRE_ASPECT, 2);
+						i.addEnchantment(Enchantment.KNOCKBACK, 2);
+						i.addEnchantment(Enchantment.LOOT_BONUS_MOBS, 3);
+						break;
+					case 269:
+						i.addEnchantment(Enchantment.DIG_SPEED, 5);
+						i.addEnchantment(Enchantment.DURABILITY, 3);
+						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
+						break;
+					case 270:
+						i.addEnchantment(Enchantment.DIG_SPEED, 5);
+						i.addEnchantment(Enchantment.DURABILITY, 3);
+						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
+						break;
+					case 271:
+						i.addEnchantment(Enchantment.DIG_SPEED, 5);
+						i.addEnchantment(Enchantment.DURABILITY, 3);
+						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
+						break;
+					case 272:
+						i.addEnchantment(Enchantment.DAMAGE_ALL, 5);
+						i.addEnchantment(Enchantment.DAMAGE_ARTHROPODS, 5);
+						i.addEnchantment(Enchantment.DAMAGE_UNDEAD, 5);
+						i.addEnchantment(Enchantment.FIRE_ASPECT, 2);
+						i.addEnchantment(Enchantment.KNOCKBACK, 2);
+						i.addEnchantment(Enchantment.LOOT_BONUS_MOBS, 3);
+						break;
+					case 273:
+						i.addEnchantment(Enchantment.DIG_SPEED, 5);
+						i.addEnchantment(Enchantment.DURABILITY, 3);
+						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
+						break;
+					case 274:
+						i.addEnchantment(Enchantment.DIG_SPEED, 5);
+						i.addEnchantment(Enchantment.DURABILITY, 3);
+						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
+						break;
+					case 275:
+						i.addEnchantment(Enchantment.DIG_SPEED, 5);
+						i.addEnchantment(Enchantment.DURABILITY, 3);
+						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
+						break;
+					case 276:
+						i.addEnchantment(Enchantment.DAMAGE_ALL, 5);
+						i.addEnchantment(Enchantment.DAMAGE_ARTHROPODS, 5);
+						i.addEnchantment(Enchantment.DAMAGE_UNDEAD, 5);
+						i.addEnchantment(Enchantment.FIRE_ASPECT, 2);
+						i.addEnchantment(Enchantment.KNOCKBACK, 2);
+						i.addEnchantment(Enchantment.LOOT_BONUS_MOBS, 3);
+						break;
+					case 277:
+						i.addEnchantment(Enchantment.DIG_SPEED, 5);
+						i.addEnchantment(Enchantment.DURABILITY, 3);
+						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
+						break;
+					case 278:
+						i.addEnchantment(Enchantment.DIG_SPEED, 5);
+						i.addEnchantment(Enchantment.DURABILITY, 3);
+						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
+						break;
+					case 279:
+						i.addEnchantment(Enchantment.DIG_SPEED, 5);
+						i.addEnchantment(Enchantment.DURABILITY, 3);
+						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
+						break;
+					case 283:
+						i.addEnchantment(Enchantment.DAMAGE_ALL, 5);
+						i.addEnchantment(Enchantment.DAMAGE_ARTHROPODS, 5);
+						i.addEnchantment(Enchantment.DAMAGE_UNDEAD, 5);
+						i.addEnchantment(Enchantment.FIRE_ASPECT, 2);
+						i.addEnchantment(Enchantment.KNOCKBACK, 2);
+						i.addEnchantment(Enchantment.LOOT_BONUS_MOBS, 3);
+						break;
+					case 284:
+						i.addEnchantment(Enchantment.DIG_SPEED, 5);
+						i.addEnchantment(Enchantment.DURABILITY, 3);
+						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
+						break;
+					case 285:
+						i.addEnchantment(Enchantment.DIG_SPEED, 5);
+						i.addEnchantment(Enchantment.DURABILITY, 3);
+						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
+						break;
+					case 286:
+						i.addEnchantment(Enchantment.DIG_SPEED, 5);
+						i.addEnchantment(Enchantment.DURABILITY, 3);
+						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
+						break;
+					case 298:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.OXYGEN, 3);
+						i.addEnchantment(Enchantment.WATER_WORKER, 1);
+						break;
+					case 299:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 300:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 301:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FALL, 4);
+						break;
+					case 302:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.OXYGEN, 3);
+						i.addEnchantment(Enchantment.WATER_WORKER, 1);
+						break;
+					case 303:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 304:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 305:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FALL, 4);
+						break;
+					case 306:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.OXYGEN, 3);
+						i.addEnchantment(Enchantment.WATER_WORKER, 1);
+						break;
+					case 307:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 308:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 309:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FALL, 4);
+						break;
+					case 310:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.OXYGEN, 3);
+						i.addEnchantment(Enchantment.WATER_WORKER, 1);
+						break;
+					case 311:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 312:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 313:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FALL, 4);
+						break;
+					case 314:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.OXYGEN, 3);
+						i.addEnchantment(Enchantment.WATER_WORKER, 1);
+						break;
+					case 315:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 316:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 317:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FALL, 4);
+						break;
+					}
+				}
+			}
+			for(ItemStack i : p.getInventory().getArmorContents())
+			{
+				if(i!=null)
+				{
+					switch(i.getTypeId())
+					{
+					case 298:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.OXYGEN, 3);
+						i.addEnchantment(Enchantment.WATER_WORKER, 1);
+						break;
+					case 299:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 300:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 301:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FALL, 4);
+						break;
+					case 302:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.OXYGEN, 3);
+						i.addEnchantment(Enchantment.WATER_WORKER, 1);
+						break;
+					case 303:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 304:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 305:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FALL, 4);
+						break;
+					case 306:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.OXYGEN, 3);
+						i.addEnchantment(Enchantment.WATER_WORKER, 1);
+						break;
+					case 307:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 308:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 309:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FALL, 4);
+						break;
+					case 310:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.OXYGEN, 3);
+						i.addEnchantment(Enchantment.WATER_WORKER, 1);
+						break;
+					case 311:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 312:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 313:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FALL, 4);
+						break;
+					case 314:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.OXYGEN, 3);
+						i.addEnchantment(Enchantment.WATER_WORKER, 1);
+						break;
+					case 315:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 316:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						break;
+					case 317:
+						i.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+						i.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+						i.addEnchantment(Enchantment.PROTECTION_FALL, 4);
+						break;
+					}
+				}
+			}
+		}
 	}
 
 
