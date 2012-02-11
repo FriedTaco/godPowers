@@ -1,12 +1,14 @@
 package com.FriedTaco.taco.godPowers;
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 
-public class godPowersEntityListener extends EntityListener implements Cancellable
+public class godPowersEntityListener implements Listener
 {
 	@SuppressWarnings("unused")
 	private final godPowers plugin;
@@ -14,11 +16,13 @@ public class godPowersEntityListener extends EntityListener implements Cancellab
     public godPowersEntityListener(godPowers instance) {
         plugin = instance;
     }
+    @EventHandler(priority = EventPriority.HIGH)
     public void onFoodLevelChange(FoodLevelChangeEvent event)
     {
     	if(event.getEntity() instanceof Player && godPowers.godmodeEnabled.contains(((Player) event.getEntity()).getName()))
     		event.setCancelled(true);
     }
+    @EventHandler(priority = EventPriority.HIGH)
     public void onEntityDamage(EntityDamageEvent event)
     {
     	if(event.getEntity() instanceof Player)
@@ -50,12 +54,10 @@ public class godPowersEntityListener extends EntityListener implements Cancellab
     }
 
 	
-	@Override
 	public boolean isCancelled() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	@Override
 	public void setCancelled(boolean arg0) {
 		// TODO Auto-generated method stub
 		

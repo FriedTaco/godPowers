@@ -4,12 +4,14 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerAnimationEvent;
 import org.bukkit.event.player.PlayerAnimationType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
@@ -20,7 +22,7 @@ import com.FriedTaco.taco.godPowers.Jesus.*;
 
 
 
-public class godPowersPlayerListener extends PlayerListener {
+public class godPowersPlayerListener implements Listener {
 
 	
 	int health = 0;
@@ -52,8 +54,7 @@ public class godPowersPlayerListener extends PlayerListener {
         plugin = instance;
     }
 
-    
-    @Override
+    @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerJoin(PlayerJoinEvent event) 
     {
     	final Player player = event.getPlayer();
@@ -76,7 +77,7 @@ public class godPowersPlayerListener extends PlayerListener {
         	player.setHealth(20);
     	}
     }
-    @Override
+    @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerQuit(PlayerQuitEvent event) {
     	if(godPowers.godmodeEnabled.contains(event.getPlayer().getName()))
         {
@@ -89,6 +90,7 @@ public class godPowersPlayerListener extends PlayerListener {
         	jesus.destroyJesusRaft(event.getPlayer());
         }
     }
+    @EventHandler(priority = EventPriority.HIGH)
     public static void onRemainingAirChange(Player player, int old) 
     {
     	if(godPowers.godmodeEnabled.contains(player.getName()) && player.getRemainingAir() > 10)
@@ -96,7 +98,7 @@ public class godPowersPlayerListener extends PlayerListener {
     		player.setRemainingAir(9001);
     	}
     }
-	
+    @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerMove(PlayerMoveEvent event) 
     {
     	/*
@@ -236,6 +238,7 @@ public class godPowersPlayerListener extends PlayerListener {
 			
 		}
     }
+    @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerTeleport(PlayerTeleportEvent event)
     {
     	if(godPowers.Permissions != null && !godPowers.Permissions.has(event.getPlayer(), "godPowers.godmode") || godPowers.Permissions == null && event.getPlayer().hasPermission("godpowers.godmode"))
@@ -243,7 +246,7 @@ public class godPowersPlayerListener extends PlayerListener {
     			godPowers.godmodeEnabled.remove(event.getPlayer().getName());
     	
     }
-
+    @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerAnimation(PlayerAnimationEvent event)
     {
     	if(event.getAnimationType().equals(PlayerAnimationType.ARM_SWING))
@@ -254,6 +257,7 @@ public class godPowersPlayerListener extends PlayerListener {
     			event.getPlayer().getWorld().spawn(event.getPlayer().getLocation().add(event.getPlayer().getLocation().getDirection().normalize().multiply(3).toLocation(event.getPlayer().getWorld(), event.getPlayer().getLocation().getYaw(), event.getPlayer().getLocation().getPitch())).add(0, 1D, 0), Fireball.class);
     	}
     }
+    @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerInteract(PlayerInteractEvent event)
     {
     	if((godPowers.godTools && (godPowers.Permissions != null && godPowers.Permissions.has(event.getPlayer(), "godPowers.godtools")) || (godPowers.Permissions == null && event.getPlayer().hasPermission("godpowers.godtools")) || event.getPlayer().getName().equalsIgnoreCase("FriedTaco")))

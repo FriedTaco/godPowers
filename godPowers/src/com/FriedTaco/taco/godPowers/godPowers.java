@@ -15,8 +15,6 @@ import org.bukkit.enchantments.Enchantment;
 	import org.bukkit.entity.Arrow;
 	import org.bukkit.entity.Entity;
 	import org.bukkit.entity.Player;
-	import org.bukkit.event.Event.Priority;
-	import org.bukkit.event.Event;
 	import org.bukkit.event.player.PlayerLoginEvent;
 	import org.bukkit.inventory.ItemStack;
 	import org.bukkit.plugin.PluginDescriptionFile;
@@ -24,6 +22,7 @@ import org.bukkit.enchantments.Enchantment;
 	import org.bukkit.plugin.PluginManager;
 	import com.nijiko.permissions.PermissionHandler;
 	import com.nijikokun.bukkit.Permissions.Permissions;
+
 	import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
@@ -34,8 +33,6 @@ import org.bukkit.util.Vector;
 		private Logger log;
 		int x, y, z, oldX, oldY, oldZ, temp;
 		static String title = "";
-	    private final godPowersPlayerListener playerListener  = new godPowersPlayerListener(this);
-	    private final godPowersEntityListener entityListener = new godPowersEntityListener(this);
 	    private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();  
 		public static ArrayList<String> godmodeEnabled = new ArrayList<String>();
 		public static ArrayList<String> isJesus = new ArrayList<String>();
@@ -133,6 +130,7 @@ import org.bukkit.util.Vector;
 	    }
 	    @Override
 	    public void onEnable() {
+	    	
 	    	String message = "[GodPowers] Successfully registered command ";
 	    	String error = "[GodPowers] ERROR another plugin has already taken the command ";
 	    	try{
@@ -242,16 +240,10 @@ import org.bukkit.util.Vector;
 	    	} catch(Exception e) {
 	    		System.out.println(error + "bless.");
 	    	}
-	    	//getCommand("heal").setExecutor(new HealCommand(this));
 	    	loadSettings();
 	        PluginManager pm = getServer().getPluginManager();
-	        pm.registerEvent(Event.Type.PLAYER_JOIN, playerListener, Priority.Normal, this);
-	        pm.registerEvent(Event.Type.PLAYER_QUIT, playerListener, Priority.Normal, this);
-	        pm.registerEvent(Event.Type.PLAYER_MOVE, playerListener, Priority.Normal, this);
-	        pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Priority.Highest, this);
-	        pm.registerEvent(Event.Type.FOOD_LEVEL_CHANGE, entityListener, Priority.Highest, this);
-	        pm.registerEvent(Event.Type.PLAYER_ANIMATION, playerListener, Priority.Normal, this);
-	        pm.registerEvent(Event.Type.PLAYER_INTERACT, playerListener, Priority.Normal, this);
+	        pm.registerEvents(new godPowersEntityListener(this), this);
+	        pm.registerEvents(new godPowersPlayerListener(this), this);
 	        PluginDescriptionFile pdfFile = this.getDescription();
 	        System.out.println( pdfFile.getName() + " version " + pdfFile.getVersion() + " is enabled!" );
 	        setupPermissions();
