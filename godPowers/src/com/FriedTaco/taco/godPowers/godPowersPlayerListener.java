@@ -1,6 +1,9 @@
 package com.FriedTaco.taco.godPowers;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
@@ -8,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerAnimationEvent;
 import org.bukkit.event.player.PlayerAnimationType;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -251,10 +255,17 @@ public class godPowersPlayerListener implements Listener {
     {
     	if(event.getAnimationType().equals(PlayerAnimationType.ARM_SWING))
     	{
-    		if(godPowers.isZeus.contains(event.getPlayer().getName()))
-    			event.getPlayer().getWorld().strikeLightning((event.getPlayer().getTargetBlock(null, 100).getLocation()));
-    		if(godPowers.isVulcan.contains(event.getPlayer().getName()))
-    			event.getPlayer().getWorld().spawn(event.getPlayer().getLocation().add(event.getPlayer().getLocation().getDirection().normalize().multiply(3).toLocation(event.getPlayer().getWorld(), event.getPlayer().getLocation().getYaw(), event.getPlayer().getLocation().getPitch())).add(0, 1D, 0), Fireball.class);
+    		Player p = event.getPlayer();
+    		World w = p.getWorld();
+    		if(godPowers.isZeus.contains(p.getName()))
+    		{
+    			w.strikeLightning((p.getTargetBlock(null, 100).getLocation()));
+    		}
+    		if(godPowers.isVulcan.contains(p.getName()))
+    		{
+    			Fireball f = event.getPlayer().getWorld().spawn(event.getPlayer().getLocation().add(event.getPlayer().getLocation().getDirection().normalize().multiply(3).toLocation(event.getPlayer().getWorld(), event.getPlayer().getLocation().getYaw(), event.getPlayer().getLocation().getPitch())).add(0, 1D, 0), Fireball.class);
+    			f.setShooter(p); 
+    		}
     	}
     }
     @EventHandler(priority = EventPriority.HIGH)
@@ -262,91 +273,40 @@ public class godPowersPlayerListener implements Listener {
     {
     	if((godPowers.godTools && (godPowers.Permissions != null && godPowers.Permissions.has(event.getPlayer(), "godPowers.godtools")) || (godPowers.Permissions == null && event.getPlayer().hasPermission("godpowers.godtools")) || event.getPlayer().getName().equalsIgnoreCase("FriedTaco")))
     	{
-			if(event.getAction() == Action.LEFT_CLICK_BLOCK && event.getItem() != null)
-			{
-				if(event.getItem().getTypeId() == 284 && godPowers.shovelDrops.contains(event.getClickedBlock().getTypeId()))
-				{
-					event.getItem().setDurability((short) 0);
-					event.getPlayer().getWorld().dropItemNaturally(event.getClickedBlock().getLocation(), new ItemStack(getDrop(event.getClickedBlock()), getAmount(event.getClickedBlock())));
-					event.getClickedBlock().setTypeId(0);
-				}
-				else if(event.getItem().getTypeId() == 285 && godPowers.pickDrops.contains(event.getClickedBlock().getTypeId()))
-				{
-					event.getItem().setDurability((short) 0);
-					if(event.getClickedBlock().getTypeId() == 21)
-					{
-						ItemStack item = new ItemStack(getDrop(event.getClickedBlock()), getAmount(event.getClickedBlock()));
-						item.setDurability((short) 4);
-						event.getPlayer().getWorld().dropItemNaturally(event.getClickedBlock().getLocation(), item);
-					}
-					else
-					{
-						event.getPlayer().getWorld().dropItemNaturally(event.getClickedBlock().getLocation(), new ItemStack(getDrop(event.getClickedBlock()), getAmount(event.getClickedBlock())));
-					}
-					event.useInteractedBlock();
-					event.getClickedBlock().setTypeId(0);					
-				}
-				else if(event.getItem().getTypeId() == 286 && godPowers.axeDrops.contains(event.getClickedBlock().getTypeId()))
-				{
-					event.getItem().setDurability((short) 0);
-					event.getPlayer().getWorld().dropItemNaturally(event.getClickedBlock().getLocation(), new ItemStack(getDrop(event.getClickedBlock()), getAmount(event.getClickedBlock())));
-					event.getClickedBlock().setTypeId(0);
-				}
-			}
-    	}
-    }
-    private int getDrop(Block block)
-    {
-    	if(block.getTypeId() == 1 || block.getTypeId() == 4)
-    	{
-    	    return 4;
-    	}
-    	else if(block.getTypeId() == 2 || block.getTypeId() == 3 || block.getTypeId() == 60)
-    	{
-    		return 3;
-    	}
-    	if(block.getTypeId() == 16)
-    	{
-    	    return 263;
-    	}
-    	if(block.getTypeId() == 21)
-    	{
-    	    return 351;
-    	}
-    	if(block.getTypeId() == 73 || block.getTypeId() == 74)
-    	{
-    	    return 331;
-    	}
-    	else if(block.getTypeId() == 18)
-    	{
-    		if(Math.random() < .1)
+    		if(event.getAction() == Action.LEFT_CLICK_BLOCK)
     		{
-    			return 6;
-    		}
-    		else
-    		{
-    			return 0;
+	    		ItemStack i = event.getItem();
+	    		Block b = event.getClickedBlock();
+	    		Player p = event.getPlayer();
+	    		BlockBreakEvent e = new BlockBreakEvent(b, p);
+	    		Bukkit.getPluginManager().callEvent(e);
+	    		if(i != null && !e.isCancelled())
+				{
+	    			if(i.getTypeId() == 284 && godPowers.shovelDrops.contains(b.getTypeId()))
+					{
+						i.setDurability((short) 0);
+						b.breakNaturally();
+						for(int x = 0; x<=8; x++)
+							p.getWorld().playEffect(b.getLocation(), Effect.SMOKE, x);
+					}
+					else if(i.getTypeId() == 285 && godPowers.pickDrops.contains(b.getTypeId()))
+					{
+						i.setDurability((short) 0);
+						b.breakNaturally();
+						for(int x = 0; x<=8; x++)
+							p.getWorld().playEffect(b.getLocation(), Effect.SMOKE, x);
+					}
+					else if(i.getTypeId() == 286 && godPowers.axeDrops.contains(b.getTypeId()))
+					{
+						i.setDurability((short) 0);
+						b.breakNaturally();
+						for(int x = 0; x<=8; x++)
+							p.getWorld().playEffect(b.getLocation(), Effect.SMOKE, x);
+					}
+				}
     		}
     	}
-    	
-    	else
-    	{
-    		return block.getTypeId();
-    	}
     }
-    public int getAmount(Block block)
-    {
-    	if(block.getTypeId() == 73 || block.getTypeId() == 74 || block.getTypeId() == 21)
-    	{
-    	    return (int)((Math.random()*10)%5);
-    	}
-    	else
-    	{
-    		return 1;
-    	}
-    		
-    }
-
    }
 
 

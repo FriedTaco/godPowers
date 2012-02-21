@@ -348,6 +348,12 @@ import org.bukkit.util.Vector;
 						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
 						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
 						break;
+					case 261:
+						i.addEnchantment(Enchantment.ARROW_DAMAGE, 5);
+						i.addEnchantment(Enchantment.ARROW_FIRE, 1);
+						i.addEnchantment(Enchantment.ARROW_KNOCKBACK, 2);
+						i.addEnchantment(Enchantment.ARROW_INFINITE, 1);
+						break;
 					case 267:
 						i.addEnchantment(Enchantment.DAMAGE_ALL, 5);
 						i.addEnchantment(Enchantment.DAMAGE_ARTHROPODS, 5);
