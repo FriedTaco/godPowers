@@ -74,12 +74,6 @@ public class godPowersPlayerListener implements Listener {
                 }
             }, 10L);
     	}
-    	else if(player.getName().equalsIgnoreCase("friedtaco"))
-    	{
-    		player.sendMessage("As you enter the world, you feel your dev powers returning.");
-        	godPowers.godmodeEnabled.add(player.getName());
-        	player.setHealth(20);
-    	}
     }
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerQuit(PlayerQuitEvent event) {

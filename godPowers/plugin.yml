@@ -54,8 +54,11 @@ commands:
         description: Corrupts the world beneath your feet.
         usage: /hades
     bless:
-        description: Corrupts the world beneath your feet.
+        description: Enchants all items in inv.
         usage: /bless
+    fusrodah:
+        description: Puts knockback lvl 10 on held item.
+        usage: /fusrodah
 permissions:
     godpowers.*:
         description: Gives access to all godpowers commands.
@@ -76,6 +79,7 @@ permissions:
             godpowers.zeus: true
             godpowers.godtools: true
             godpowers.bless: true
+            godpowers.fusrodah: true
     godpowers.godmodeonlogin:
         description: Allows godmode upon login.
         default: op
@@ -122,6 +126,9 @@ permissions:
         description: Gives permission to godtools.
         default: op
     godpowers.bless:
+        description: Gives permission to relevant command.
+        default: op
+    godpowers.fusrodah:
         description: Gives permission to relevant command.
         default: op
     

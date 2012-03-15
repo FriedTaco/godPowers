@@ -239,6 +239,12 @@ import org.bukkit.util.Vector;
     		list.put("bless", "- Enchant your equipment with the power of gods!");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "bless.");
+	    	}try{
+	    		getCommand("fusrodah").setExecutor(new FusRoDAH(this));
+    			System.out.println(message + "FusRoDah.");
+    		list.put("FusRoDAH", "- Enchants item in hand with Knockback level 10!");
+	    	} catch(Exception e) {
+	    		System.out.println(error + "FusRoDAH.");
 	    	}
 	    	loadSettings();
 	        PluginManager pm = getServer().getPluginManager();

@@ -1,0 +1,56 @@
+package com.FriedTaco.taco.godPowers;
+
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+public class FusRoDAH implements CommandExecutor
+{
+	private Player player;
+	@SuppressWarnings("unused")
+	private final godPowers plugin;
+    public FusRoDAH(godPowers instance) 
+    {
+        plugin = instance;
+    }
+
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
+    {
+    	String[] split = args;
+    	if(sender instanceof Player)
+    	{
+    		player = (Player) sender;
+    		if((godPowers.Permissions == null && player.hasPermission("godpowers.fusrodah")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.fusrodah")))
+    		{
+    			if(split.length > 0)
+    			{
+    				player.sendMessage(ChatColor.RED + "Incorrect syntax. Correct usage: '/FusRoDah'");
+    				return true;
+    			}
+    			else
+    			{
+    				ItemStack i = player.getItemInHand();
+    				if(i != null && i.getTypeId() != 0)
+    				{
+    					player.sendMessage(ChatColor.DARK_RED + "Fus ro DAH!!");
+    					i.addUnsafeEnchantment(Enchantment.KNOCKBACK, 10);
+    				}
+    				else
+    				{
+    					player.sendMessage(ChatColor.RED + "You aren't holding anything.");
+    				}
+    				return true;
+    			}
+    		}
+    		else
+    		{
+    			player.sendMessage(ChatColor.DARK_RED + "The gods prevent you from using this command.");
+    		}
+    	}
+		return false;
+    }
+}

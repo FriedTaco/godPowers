@@ -1,11 +1,14 @@
 package com.FriedTaco.taco.godPowers;
 
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 
 public class godPowersEntityListener implements Listener
@@ -49,6 +52,26 @@ public class godPowersEntityListener implements Listener
 			else if(godPowers.DemiGod.contains(player.getName()))
 			{
 				event.setDamage((int) (event.getDamage() * godPowers.DemiModifier));
+			}
+		}
+    	if(event instanceof EntityDamageByEntityEvent)
+		{
+			EntityDamageByEntityEvent e = (EntityDamageByEntityEvent) event;
+			if(e.getDamager() instanceof Player)
+			{
+				Player p = (Player) e.getDamager();
+				ItemStack i = p.getItemInHand();
+				if(i.containsEnchantment(Enchantment.KNOCKBACK) && i.getEnchantmentLevel(Enchantment.KNOCKBACK) == 10)
+				{
+					if(!(e.getEntity() instanceof Player))
+					{
+						Vector v = p.getEyeLocation().getDirection();
+						v.setX(v.getX()*25);
+						v.setZ(v.getZ()*25);
+						v.setY(v.getY()*2);
+						e.getEntity().setVelocity(v);
+					}
+				}
 			}
 		}
     }

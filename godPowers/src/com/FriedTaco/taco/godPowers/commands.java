@@ -1,14 +1,10 @@
 package com.FriedTaco.taco.godPowers;
 
-//import org.bukkit.World;
-import java.util.ArrayList;
-
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginDescriptionFile;
 
 public class commands implements CommandExecutor
 {
