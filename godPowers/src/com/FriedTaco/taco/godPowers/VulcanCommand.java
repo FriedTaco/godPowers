@@ -21,7 +21,7 @@ public class VulcanCommand implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.hasPermission("godpowers.vulcan")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.vulcan")) || player.getName().equalsIgnoreCase("FriedTaco"))
+    		if(player.hasPermission("godpowers.vulcan"))
     		{	
 				if(split.length == 0)
 				{
@@ -30,16 +30,16 @@ public class VulcanCommand implements CommandExecutor
 					loc.setY(player.getTargetBlock(null, 100).getLocation().getY()+1);
 					Location playerLoc = player.getLocation().add(loc);
 					*/
-					if(godPowers.isVulcan.contains(player.getName()))
+					if(plugin.isVulcan.contains(player.getName()))
 	    			{
 						player.sendMessage(ChatColor.BLUE + "You feel the sudden loss of the fire in your soul.");
-	    				godPowers.isVulcan.remove(player.getName());
+	    				plugin.isVulcan.remove(player.getName());
 	    				return true;
 	    			}
 	    			else
 	    			{
 	    				player.sendMessage(ChatColor.BLUE + "Goodness gracious, great balls of fire!");
-	    				godPowers.isVulcan.add(player.getName());
+	    				plugin.isVulcan.add(player.getName());
 	    				return true;
 	    			}
 					//world.spawn(player.getTargetBlock(null, 100).getLocation(), Fireball.class);

@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 public class SuperJumpCommand implements CommandExecutor
 {
 	private Player player;
-	@SuppressWarnings("unused")
 	private final godPowers plugin;
     public SuperJumpCommand(godPowers instance) 
     {
@@ -22,17 +21,17 @@ public class SuperJumpCommand implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.hasPermission("godpowers.superjump")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.superjump")) || player.getName().equalsIgnoreCase("FriedTaco"))
+    		if(player.hasPermission("godpowers.superjump"))
     		{
-	    		if(godPowers.superJumper.contains(player.getName()))
+	    		if(plugin.superJumper.contains(player.getName()))
 	    		{
-	    			godPowers.superJumper.remove(player.getName());
+	    			plugin.superJumper.remove(player.getName());
 	    			player.sendMessage(ChatColor.BLUE + "You can no longer jump great heights.");
 	    		}
 	    		else
 	        	{
 	    			player.sendMessage(ChatColor.BLUE + "You feel like you can leap tall building in a single bound!");
-	        		godPowers.superJumper.add(player.getName());
+	        		plugin.superJumper.add(player.getName());
 	        	}
 	    		return true;
     		}

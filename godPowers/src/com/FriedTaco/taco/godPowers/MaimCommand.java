@@ -23,7 +23,7 @@ public class MaimCommand implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.hasPermission("godpowers.maim")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.maim")) || player.getName().equalsIgnoreCase("FriedTaco"))
+    		if(player.hasPermission("godpowers.maim"))
     		{
 	    		if(split.length == 1)
 				{
@@ -32,7 +32,7 @@ public class MaimCommand implements CommandExecutor
 					{
 						player.sendMessage(ChatColor.RED + "The user "+split[0]+" does not exist or is not currently logged in.");
 					}
-					else if(godPowers.godmodeEnabled.contains(targetPlayer.getName()))
+					else if(plugin.godmodeEnabled.contains(targetPlayer.getName()))
 					{
 						player.sendMessage(ChatColor.RED + "Fool! You cannot maim a god!");
 					}

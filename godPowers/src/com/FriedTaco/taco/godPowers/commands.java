@@ -19,14 +19,14 @@ public class commands implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.hasPermission("godpowers.commands")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.commands")) || player.getName().equalsIgnoreCase("FriedTaco"))
+    		if(player.hasPermission("godpowers.commands"))
     		{	
     			
 				if(args.length == 0)
 				{
 					player.sendMessage(ChatColor.BLUE + "You can use the following commands: (< > = Optional [ ] = Required)");
 					for(String s : plugin.list.keySet())
-						if((godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers."+plugin.list.get(s))) || (godPowers.Permissions == null && player.hasPermission("godPowers."+plugin.list.get(s))))
+						if(player.hasPermission("godpowers."+plugin.list.get(s)))
 								player.sendMessage(ChatColor.AQUA + "/" + s + " " + plugin.list.get(s));							
 				}
 				else

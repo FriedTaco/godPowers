@@ -21,7 +21,7 @@ public class BlessCommand implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.hasPermission("godpowers.bless")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.bless")) || player.getName().equalsIgnoreCase("FriedTaco"))
+    		if(player.hasPermission("godpowers.bless"))
     		{
     			if(split.length > 0)
     			{

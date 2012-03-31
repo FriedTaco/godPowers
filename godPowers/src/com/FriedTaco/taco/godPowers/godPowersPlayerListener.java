@@ -8,7 +8,6 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -18,11 +17,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
-import com.FriedTaco.taco.godPowers.Jesus;
-import com.FriedTaco.taco.godPowers.Jesus.*;
+
+import com.FriedTaco.taco.godPowers.Jesus.Raft;
 
 
 
@@ -58,45 +56,45 @@ public class godPowersPlayerListener implements Listener {
         plugin = instance;
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) 
     {
     	final Player player = event.getPlayer();
-    	if(((godPowers.Permissions == null && player.hasPermission("godpowers.godmodeonlogin")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.godmodeOnLogin")) && godPowers.godModeOnLogin))
+    	if(plugin.godModeOnLogin && player.hasPermission("godpowers.godmodeonlogin"))
     	{
     		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                 public void run() {
                 	player.sendMessage("As you enter the world, you feel your godly powers returning.");
-                	player.setDisplayName(godPowers.title + player.getDisplayName());
-                	godPowers.godmodeEnabled.add(player.getName());
+                	player.setDisplayName(plugin.title + player.getDisplayName());
+                	plugin.godmodeEnabled.add(player.getName());
                 	player.setHealth(20);
-                	player.setDisplayName(godPowers.title + player.getName());
+                	player.setDisplayName(plugin.title + player.getName());
                 }
             }, 10L);
     	}
     }
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-    	if(godPowers.godmodeEnabled.contains(event.getPlayer().getName()))
+    	if(plugin.godmodeEnabled.contains(event.getPlayer().getName()))
         {
-        	godPowers.godmodeEnabled.remove(event.getPlayer().getName());
+        	plugin.godmodeEnabled.remove(event.getPlayer().getName());
         }
-    	if(godPowers.isJesus.contains(event.getPlayer().getName()))
+    	if(plugin.isJesus.contains(event.getPlayer().getName()))
         {
-        	godPowers.isJesus.remove(event.getPlayer().getName());
+        	plugin.isJesus.remove(event.getPlayer().getName());
         	jesus = (Raft)Jesus.rafts.get(event.getPlayer().getName());
         	jesus.destroyJesusRaft(event.getPlayer());
         }
     }
-    @EventHandler(priority = EventPriority.HIGH)
-    public static void onRemainingAirChange(Player player, int old) 
+    @EventHandler
+    public void onRemainingAirChange(Player player, int old) 
     {
-    	if(godPowers.godmodeEnabled.contains(player.getName()) && player.getRemainingAir() > 10)
+    	if(plugin.godmodeEnabled.contains(player.getName()) && player.getRemainingAir() > 10)
     	{
     		player.setRemainingAir(9001);
     	}
     }
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) 
     {
     	/*
@@ -109,17 +107,17 @@ public class godPowersPlayerListener implements Listener {
     		event.getTo().getBlock().getRelative(0,-1,0).setTypeId(89);
     	}
     	*/
-    	if(godPowers.godmodeEnabled.contains(event.getPlayer().getName()) && event.getPlayer().getFireTicks() > 1)
+    	if(plugin.godmodeEnabled.contains(event.getPlayer().getName()) && event.getPlayer().getFireTicks() > 1)
     	{
     		event.getPlayer().setFireTicks(0);
     	}
-		if(godPowers.isJesus.contains(event.getPlayer().getName()))
+		if(plugin.isJesus.contains(event.getPlayer().getName()))
 		{
 			Raft jesus = (Raft)Jesus.rafts.get(event.getPlayer().getName());
     		jesus.destroyJesusRaft(event.getPlayer());
     		jesus.makeJesusRaft(event.getPlayer());
 		}
-		if(godPowers.isInferno.contains(event.getPlayer().getName()))
+		if(plugin.isInferno.contains(event.getPlayer().getName()))
 		{
 			double diffX = event.getFrom().getX() - event.getTo().getX();
 			double diffZ = event.getFrom().getZ() - event.getTo().getZ();
@@ -146,7 +144,7 @@ public class godPowersPlayerListener implements Listener {
 				block.setTypeId(51);
 			}
 		}
-		if((godPowers.superJumper.contains(event.getPlayer().getName())))
+		if((plugin.superJumper.contains(event.getPlayer().getName())))
 		{
 			Block block, control;
 			dir = event.getPlayer().getVelocity().setY(2);
@@ -161,15 +159,15 @@ public class godPowersPlayerListener implements Listener {
 				}
 			}
 		}
-		if(godPowers.burn.contains(event.getPlayer().getName()) && event.getPlayer().getFireTicks() < 10)
+		if(plugin.burn.contains(event.getPlayer().getName()) && event.getPlayer().getFireTicks() < 10)
 		{
 			event.getPlayer().setFireTicks(9001);
 		}
-		if(godPowers.arrowKill.contains(event.getPlayer().getName()))
+		if(plugin.arrowKill.contains(event.getPlayer().getName()))
 		{
-			godPowers.arrowSlay(event.getTo(), event.getPlayer().getWorld(), event.getPlayer());
+			plugin.arrowSlay(event.getTo(), event.getPlayer().getWorld(), event.getPlayer());
 		}
-		if(godPowers.gaia.contains(event.getPlayer().getName()))
+		if(plugin.gaia.contains(event.getPlayer().getName()))
 		{
 			for(int x=-2; x<=2; x++)
 			{
@@ -190,7 +188,7 @@ public class godPowersPlayerListener implements Listener {
 				}
 			}
 		}
-		if(godPowers.hades.contains(event.getPlayer().getName()) && event.getFrom().getBlock().getLocation().distance(event.getTo().getBlock().getLocation()) > 0)
+		if(plugin.hades.contains(event.getPlayer().getName()) && event.getFrom().getBlock().getLocation().distance(event.getTo().getBlock().getLocation()) > 0)
 		{
 			for(int x=-2; x<=2; x++)
 			{
@@ -236,70 +234,63 @@ public class godPowersPlayerListener implements Listener {
 			
 		}
     }
-    @EventHandler(priority = EventPriority.HIGH)
-    public void onPlayerTeleport(PlayerTeleportEvent event)
-    {
-    	if(godPowers.Permissions != null && !godPowers.Permissions.has(event.getPlayer(), "godPowers.godmode") || godPowers.Permissions == null && event.getPlayer().hasPermission("godpowers.godmode"))
-    		if(godPowers.godmodeEnabled.contains(event.getPlayer().getName()))
-    			godPowers.godmodeEnabled.remove(event.getPlayer().getName());
-    	
-    }
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler
     public void onPlayerAnimation(PlayerAnimationEvent event)
     {
     	if(event.getAnimationType().equals(PlayerAnimationType.ARM_SWING))
     	{
     		Player p = event.getPlayer();
     		World w = p.getWorld();
-    		if(godPowers.isZeus.contains(p.getName()))
+    		if(plugin.isZeus.contains(p.getName()))
     		{
     			w.strikeLightning((p.getTargetBlock(null, 100).getLocation()));
     		}
-    		if(godPowers.isVulcan.contains(p.getName()))
+    		if(plugin.isVulcan.contains(p.getName()))
     		{
     			Fireball f = event.getPlayer().getWorld().spawn(event.getPlayer().getLocation().add(event.getPlayer().getLocation().getDirection().normalize().multiply(3).toLocation(event.getPlayer().getWorld(), event.getPlayer().getLocation().getYaw(), event.getPlayer().getLocation().getPitch())).add(0, 1D, 0), Fireball.class);
     			f.setShooter(p); 
     		}
     	}
     }
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event)
     {
-    	if((godPowers.godTools && (godPowers.Permissions != null && godPowers.Permissions.has(event.getPlayer(), "godPowers.godtools")) || (godPowers.Permissions == null && event.getPlayer().hasPermission("godpowers.godtools")) || event.getPlayer().getName().equalsIgnoreCase("FriedTaco")))
+    	if(plugin.godTools && event.getPlayer().hasPermission("godpowers.godtools"))
     	{
     		if(event.getAction() == Action.LEFT_CLICK_BLOCK)
     		{
 	    		ItemStack i = event.getItem();
 	    		Block b = event.getClickedBlock();
 	    		Player p = event.getPlayer();
-	    		BlockBreakEvent e = new BlockBreakEvent(b, p);
-	    		Bukkit.getPluginManager().callEvent(e);
-	    		if(i != null && !e.isCancelled())
+	    		if(i != null)
 				{
-	    			if(i.getTypeId() == 284 && godPowers.shovelDrops.contains(b.getTypeId()))
+	    			if(i.getTypeId() == 284 && plugin.shovelDrops.contains(b.getTypeId()))
 					{
-						i.setDurability((short) 0);
-						b.breakNaturally();
-						for(int x = 0; x<=8; x++)
-							p.getWorld().playEffect(b.getLocation(), Effect.SMOKE, x);
+						mine(p,b,i);
 					}
-					else if(i.getTypeId() == 285 && godPowers.pickDrops.contains(b.getTypeId()))
+					else if(i.getTypeId() == 285 && plugin.pickDrops.contains(b.getTypeId()))
 					{
-						i.setDurability((short) 0);
-						b.breakNaturally();
-						for(int x = 0; x<=8; x++)
-							p.getWorld().playEffect(b.getLocation(), Effect.SMOKE, x);
+						mine(p,b,i);
 					}
-					else if(i.getTypeId() == 286 && godPowers.axeDrops.contains(b.getTypeId()))
+					else if(i.getTypeId() == 286 && plugin.axeDrops.contains(b.getTypeId()))
 					{
-						i.setDurability((short) 0);
-						b.breakNaturally();
-						for(int x = 0; x<=8; x++)
-							p.getWorld().playEffect(b.getLocation(), Effect.SMOKE, x);
+						mine(p,b,i);
 					}
 				}
     		}
     	}
+    }
+    private void mine(Player p, Block b, ItemStack i)
+    {
+    	BlockBreakEvent e = new BlockBreakEvent(b, p);
+		Bukkit.getPluginManager().callEvent(e);
+		if(!e.isCancelled())
+		{
+			i.setDurability((short) 0);
+			b.breakNaturally();
+			for(int x = 0; x<=8; x++)
+				p.getWorld().playEffect(b.getLocation(), Effect.SMOKE, x);
+		}
     }
    }
 

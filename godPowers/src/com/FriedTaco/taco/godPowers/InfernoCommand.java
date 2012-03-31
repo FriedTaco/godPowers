@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 public class InfernoCommand implements CommandExecutor
 {
 	private Player player;
-	@SuppressWarnings("unused")
 	private final godPowers plugin;
     public InfernoCommand(godPowers instance) 
     {
@@ -21,16 +20,16 @@ public class InfernoCommand implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.hasPermission("godpowers.inferno")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.inferno")) || player.getName().equalsIgnoreCase("FriedTaco"))
+    		if(player.hasPermission("godpowers.inferno"))
     		{   		
-	    		if(godPowers.isInferno.contains(player.getName()))
+	    		if(plugin.isInferno.contains(player.getName()))
 	    		{
-	    			godPowers.isInferno.remove(player.getName());
+	    			plugin.isInferno.remove(player.getName());
 	    			player.sendMessage(ChatColor.BLUE + "You feel your firey rage suddenly subside.");
 	    		}
 	    		else
 	    		{
-	    			godPowers.isInferno.add(player.getName());
+	    			plugin.isInferno.add(player.getName());
 	    			player.sendMessage(ChatColor.DARK_RED + "You begin to become so angry that your firey rage causes the very ground beneath you to burn!");
 	    		}
     		}

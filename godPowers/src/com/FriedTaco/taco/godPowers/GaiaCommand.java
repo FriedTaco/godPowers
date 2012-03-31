@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 public class GaiaCommand implements CommandExecutor
 {
 	private Player player;
-	@SuppressWarnings("unused")
 	private final godPowers plugin;
     public GaiaCommand(godPowers instance) 
     {
@@ -20,19 +19,19 @@ public class GaiaCommand implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.hasPermission("godpowers.gaia")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.gaia")) || player.getName().equalsIgnoreCase("FriedTaco"))
+    		if(player.hasPermission("godpowers.gaia"))
     		{	
 				if(args.length == 0)
 				{
-					if(godPowers.gaia.contains(player.getName()))
+					if(plugin.gaia.contains(player.getName()))
 					{
 						player.sendMessage(ChatColor.DARK_GREEN + "The earth no longer rejuvenates with your every step.");
-						godPowers.gaia.remove(player.getName());
+						plugin.gaia.remove(player.getName());
 					}
 					else
 					{
 						player.sendMessage(ChatColor.DARK_GREEN + "The essence of life spreads from you, rejuvenating the world around you.");
-						godPowers.gaia.add(player.getName());
+						plugin.gaia.add(player.getName());
 					}
 					return true;
 				}

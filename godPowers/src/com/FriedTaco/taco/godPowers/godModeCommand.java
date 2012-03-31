@@ -22,18 +22,18 @@ public class godModeCommand implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.hasPermission("godpowers.godmode")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.godmode")) || player.getName().equalsIgnoreCase("FriedTaco"))
+    		if(player.hasPermission("godpowers.godmode"))
     		{
 	    		if(split.length == 0)
 	    		{
-	    			if(godPowers.godmodeEnabled.contains(player.getName()))
+	    			if(plugin.godmodeEnabled.contains(player.getName()))
 	    			{
 	    				if(command.getName().equalsIgnoreCase("godmodeon"))
 	    				{
 	    					player.sendMessage(ChatColor.BLUE + "You are already invincible!");
 	    					return true;
 	    				}
-	    				godPowers.godmodeEnabled.remove(player.getName());
+	    				plugin.godmodeEnabled.remove(player.getName());
 	    				player.sendMessage(ChatColor.BLUE + "You have returned to being mortal.");
 	    				player.setDisplayName(player.getName());
 	    				return true;
@@ -46,8 +46,8 @@ public class godModeCommand implements CommandExecutor
 	    					return true;
 	    				}
 	    				player.sendMessage(ChatColor.BLUE + "You are now invincible!");
-	    				player.setDisplayName(godPowers.title + player.getDisplayName());
-	    				godPowers.godmodeEnabled.add(player.getName());
+	    				player.setDisplayName(plugin.title + player.getDisplayName());
+	    				plugin.godmodeEnabled.add(player.getName());
 	    				player.setHealth(20);
 	    				return true;
 	        		}
@@ -66,14 +66,14 @@ public class godModeCommand implements CommandExecutor
 					}
 					else
 					{
-						if(godPowers.godmodeEnabled.contains(targetPlayer.getName()))
+						if(plugin.godmodeEnabled.contains(targetPlayer.getName()))
 	        			{
 							if(command.getName().equalsIgnoreCase("godmodeon"))
 		    				{
 		    					player.sendMessage(ChatColor.RED + "They're already invincible!");
 		    					return true;
 		    				}
-	        				godPowers.godmodeEnabled.remove(targetPlayer.getName());
+	        				plugin.godmodeEnabled.remove(targetPlayer.getName());
 	        				targetPlayer.sendMessage(ChatColor.BLUE + player.getName() + " has returned you to being mortal.");
 	        				targetPlayer.setDisplayName(targetPlayer.getName());
 	        				player.sendMessage(ChatColor.BLUE + targetPlayer.getName() + " has been returned to being mortal.");
@@ -86,8 +86,8 @@ public class godModeCommand implements CommandExecutor
 		    					return true;
 		    				}
 	        				targetPlayer.sendMessage(ChatColor.BLUE + "By the power of "+ player.getName() + " you are now invincible!");
-	            			targetPlayer.setDisplayName(godPowers.title + targetPlayer.getName());
-	            			godPowers.godmodeEnabled.add(targetPlayer.getName());
+	            			targetPlayer.setDisplayName(plugin.title + targetPlayer.getName());
+	            			plugin.godmodeEnabled.add(targetPlayer.getName());
 	            			targetPlayer.setHealth(20);
 	            			player.sendMessage(ChatColor.BLUE + targetPlayer.getName() + " has been given invincibility.");
 	            		}

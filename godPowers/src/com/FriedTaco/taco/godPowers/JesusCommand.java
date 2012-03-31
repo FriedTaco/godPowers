@@ -11,13 +11,13 @@ import com.FriedTaco.taco.godPowers.Jesus.Raft;
 public class JesusCommand implements CommandExecutor
 {
 	private Player player;
-	@SuppressWarnings("unused")
 	private final godPowers plugin;
     public JesusCommand(godPowers instance) 
     {
         plugin = instance;
     }
-    @SuppressWarnings("unchecked")
+
+	@SuppressWarnings("unchecked")
 	@Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
@@ -26,12 +26,12 @@ public class JesusCommand implements CommandExecutor
     		player = (Player) sender;
         	Raft r = (Raft)Jesus.rafts.get(player.getName());
         	Jesus j = new Jesus();
-        	if((godPowers.Permissions == null && player.hasPermission("godpowers.jesus")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.jesus")) || player.getName().equalsIgnoreCase("FriedTaco"))
+        	if(player.hasPermission("godpowers.jesus"))
     		{
 				if (r == null)
 				{
 					player.sendMessage(ChatColor.BLUE + "You feel as if you can walk on water, just like Jesus!");
-					godPowers.isJesus.add(player.getName());
+					plugin.isJesus.add(player.getName());
 					Jesus.rafts.put(player.getName(), j.new Raft());
 					return true;
 				}
@@ -39,7 +39,7 @@ public class JesusCommand implements CommandExecutor
 				{
 					player.sendMessage(ChatColor.BLUE + "You feel your Jesus-like powers draining from you.");
 					Jesus.rafts.remove(player.getName());
-					godPowers.isJesus.remove(player.getName());
+					plugin.isJesus.remove(player.getName());
 					r.destroyJesusRaft(player);
 					return true;
 				}

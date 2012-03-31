@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 public class DieCommand implements CommandExecutor
 {
 	private Player player;
-	@SuppressWarnings("unused")
 	private final godPowers plugin;
     public DieCommand(godPowers instance) 
     {
@@ -23,9 +22,9 @@ public class DieCommand implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.hasPermission("godpowers.die")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.die")))
+    		if(player.hasPermission("godpowers.die"))
     		{
-    			if(godPowers.godmodeEnabled.contains(player.getName()))
+    			if(plugin.godmodeEnabled.contains(player.getName()))
     			{
     				player.sendMessage(ChatColor.BLUE + "Your godly powers prevent you from death.");
     				return true;
@@ -33,7 +32,7 @@ public class DieCommand implements CommandExecutor
     			else
     			{			
     				player.setHealth(0);
-    				godPowers.dropDeadItems(player);
+    				plugin.dropDeadItems(player);
     				player.sendMessage("You have died.");
     				return true;
     			}

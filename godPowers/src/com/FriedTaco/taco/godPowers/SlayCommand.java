@@ -24,7 +24,7 @@ public class SlayCommand implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.hasPermission("godpowers.slay")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.slay")) || player.getName().equalsIgnoreCase("FriedTaco"))
+    		if(player.hasPermission("godpowers.slay"))
     		{	
 				if(split.length == 1)
 				{
@@ -33,14 +33,14 @@ public class SlayCommand implements CommandExecutor
 					{
 						player.sendMessage(ChatColor.RED + "The user "+split[0]+" does not exist or is not currently logged in.");
 					}
-					else if(godPowers.godmodeEnabled.contains(targetPlayer.getName()))
+					else if(plugin.godmodeEnabled.contains(targetPlayer.getName()))
 					{
 						player.sendMessage(ChatColor.RED + "Fool! You cannot kill a god!");
 					}
 					else
 					{
 						targetPlayer.setHealth(0);
-						godPowers.dropDeadItems(targetPlayer);
+						plugin.dropDeadItems(targetPlayer);
 						player.sendMessage("ChatColor.BLUE + You have slain " + targetPlayer.getName() + ".");
 						targetPlayer.sendMessage(ChatColor.BLUE + "By the will of " + player.getName() + ", you have died.");
 							
@@ -51,7 +51,7 @@ public class SlayCommand implements CommandExecutor
 				else if(split.length == 2)
 				{
 					targetPlayer = plugin.getServer().getPlayer(split[0]);
-					if(godPowers.godmodeEnabled.contains(targetPlayer.getName()))
+					if(plugin.godmodeEnabled.contains(targetPlayer.getName()))
 					{
 						player.sendMessage("Fool! You cannot kill a god!");
 						return true;
@@ -74,14 +74,14 @@ public class SlayCommand implements CommandExecutor
 									break;
 						}
 						player.sendMessage(ChatColor.BLUE + "You slay " + targetPlayer.getName() + " with a volley of arrows!");
-							godPowers.arrowKill.add(targetPlayer.getName());
+							plugin.arrowKill.add(targetPlayer.getName());
 					}
 					else if(split[1].equalsIgnoreCase("f") || split[1].equalsIgnoreCase("fire"))
 					{
 						player.sendMessage(ChatColor.BLUE + "You ignite " + targetPlayer.getName() + " for your amusement.");
 						targetPlayer.setFireTicks(500);
 						targetPlayer.sendMessage(ChatColor.BLUE + "The gods have lit you on fire for their amusement.");
-						godPowers.burn.add(targetPlayer.getName());
+						plugin.burn.add(targetPlayer.getName());
 					}
 					else if(split[1].equalsIgnoreCase("d") || split[1].equalsIgnoreCase("drop"))
 					{

@@ -3,15 +3,13 @@ package com.FriedTaco.taco.godPowers;
 
 
 	import java.io.File;
-	import java.io.FileWriter;
-	import java.io.IOException;
-	import java.util.logging.Level;
 	import java.util.logging.Logger;
 	import java.util.ArrayList;
 	import java.util.HashMap;
 	import org.bukkit.Location;
 	import org.bukkit.World;
-import org.bukkit.enchantments.Enchantment;
+	import org.bukkit.configuration.file.FileConfiguration;
+	import org.bukkit.enchantments.Enchantment;
 	import org.bukkit.entity.Arrow;
 	import org.bukkit.entity.Entity;
 	import org.bukkit.entity.Player;
@@ -20,111 +18,59 @@ import org.bukkit.enchantments.Enchantment;
 	import org.bukkit.plugin.PluginDescriptionFile;
 	import org.bukkit.plugin.java.JavaPlugin;
 	import org.bukkit.plugin.PluginManager;
-	import com.nijiko.permissions.PermissionHandler;
-	import com.nijikokun.bukkit.Permissions.Permissions;
-
-	import org.bukkit.plugin.Plugin;
-import org.bukkit.util.Vector;
+	import org.bukkit.util.Vector;
 
 
 
 
 	public class godPowers extends JavaPlugin {
+		@SuppressWarnings("unused")
 		private Logger log;
-		int x, y, z, oldX, oldY, oldZ, temp;
-		static String title = "";
+		public String title = "";
 	    private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();  
-		public static ArrayList<String> godmodeEnabled = new ArrayList<String>();
-		public static ArrayList<String> isJesus = new ArrayList<String>();
-		public static ArrayList<String> isInferno = new ArrayList<String>();
-		public static ArrayList<String> superJumper = new ArrayList<String>();
-		public static ArrayList<String> arrowKill = new ArrayList<String>();
-		public static ArrayList<String> burn = new ArrayList<String>();
-		public static ArrayList<String> gaia = new ArrayList<String>();
-		public static ArrayList<String> isZeus = new ArrayList<String>();
-		public static ArrayList<String> isVulcan = new ArrayList<String>();
-		public static ArrayList<String> DemiGod = new ArrayList<String>();
-		public static ArrayList<String> hades = new ArrayList<String>();
-		public static ArrayList<Integer> shovelDrops = new ArrayList<Integer>();
-		public static ArrayList<Integer> pickDrops = new ArrayList<Integer>();
-		public static ArrayList<Integer> axeDrops = new ArrayList<Integer>();
+		public ArrayList<String> godmodeEnabled = new ArrayList<String>();
+		public ArrayList<String> isJesus = new ArrayList<String>();
+		public ArrayList<String> isInferno = new ArrayList<String>();
+		public ArrayList<String> superJumper = new ArrayList<String>();
+		public ArrayList<String> arrowKill = new ArrayList<String>();
+		public ArrayList<String> burn = new ArrayList<String>();
+		public ArrayList<String> gaia = new ArrayList<String>();
+		public ArrayList<String> isZeus = new ArrayList<String>();
+		public ArrayList<String> isVulcan = new ArrayList<String>();
+		public ArrayList<String> DemiGod = new ArrayList<String>();
+		public ArrayList<String> hades = new ArrayList<String>();
+		public ArrayList<Integer> shovelDrops = new ArrayList<Integer>();
+		public ArrayList<Integer> pickDrops = new ArrayList<Integer>();
+		public ArrayList<Integer> axeDrops = new ArrayList<Integer>();
 		public HashMap<String,String> list = new HashMap<String,String>();
-		public static double DemiModifier = 0;
-		public int lastID,lastData;
-		public static boolean godModeOnLogin = true;
-		public static boolean godTools = true;
-		public static PermissionHandler Permissions;
-
-	   
-		 private void setupPermissions() {
-		      Plugin test = this.getServer().getPluginManager().getPlugin("Permissions");
-
-		      if (godPowers.Permissions == null) 
-		      {
-		          if (test != null) {
-		              godPowers.Permissions = ((Permissions)test).getHandler();
-		              System.out.println("[GodPowers] Permissions detected. Now using permissions.");
-		          } else {
-		             System.out.println("[GodPowers] Permissions NOT detected. Giving permission to ops.");
-		          }
-		      }
-		  }
-		 
-	    public void loadSettings() {
-	    	final String dir = "plugins";
-	        if (!new File(dir + File.separator + "godPowers.properties").exists()) {
-	            FileWriter writer = null;
-	            try {
-	                writer = new FileWriter(dir + File.separator + "godPowers.properties");
-	                writer.write("God Powers v 2.4 configuration\r\n");
-	                writer.write("#This is a prefix for your name when you have godMode activated. Leave it blank if you don't want one.\r\n");
-	                writer.write("godModeTitle=[God] \r\n");
-	                writer.write("#If set to false, nobody will be able to have godMode activated on login.\r\n");
-	                writer.write("godModeOnLogin=true\r\n");
-	                writer.write("#Determines what percentage of damage will be taken by players using DemiGod.\r\n");
-	                writer.write("#A setting of one will mean that they will take as much damage as usual, zero means no damage.\r\n");
-	                writer.write("DemiGodDamage=0.2\r\n");
-	                writer.write("#This enables/disables god tools.\r\n");
-	                writer.write("GodTools=true\r\n");
-	                
-	                } catch (Exception e) {
-	                log.log(Level.SEVERE,
-	                        "Exception while creating godPowers.properties", e);
-	                try {
-	                    if (writer != null)
-	                        writer.close();
-	                } catch (IOException ex) {
-	                    log
-	                            .log(
-	                                    Level.SEVERE,
-	                                    "Exception while closing writer for godPowers.properties",
-	                                    ex);
-	                }
-	            } finally {
-	                try {
-	                    if (writer != null)
-	                        writer.close();
-	                } catch (IOException e) {
-	                    log
-	                            .log(
-	                                    Level.SEVERE,
-	                                    "Exception while closing writer for godPowers.properties",
-	                                    e);
-	                }
-	            }
+		public double DemiModifier = 0;
+		public boolean godModeOnLogin = true;
+		public boolean godTools = true;
+		protected static FileConfiguration Config;
+		
+		 public void loadConfig(){
+			 try{
+				File MorePhysics = new File("plugins" + File.separator + "MorePhysics" + File.separator + "config.yml");
+				MorePhysics.mkdir();
+	            Config = getConfig();
+	            if(!Config.contains("general.God_Mode_Title"))
+	            	Config.set("general.God_Mode_Title", "[God] ");
+	            if(!Config.contains("general.God_Mode_On_Login"))
+	            	Config.set("general.God_Mode_On_Login", "[God] ");
+	            if(!Config.contains("general.DemiGod_Damage_Modifier"))
+	            	Config.set("general.DemiGod_Damage_Modifier", 0.2);
+	            if(!Config.contains("general.GodTools_Enabled"))
+	            	Config.set("general.GodTools_Enabled", true);
+	            title = Config.getString("God_Mode_Title", "");
+	            godModeOnLogin = Config.getBoolean("God_Mode_On_Login", true);
+	            DemiModifier= Config.getDouble("general.DemiGod_Damage_Modifier", 0.2);
+	            godTools = Config.getBoolean("general.GodTools_Enabled",true);
+	            
+	            saveConfig();
+			 } catch(Exception e){
+				 
+			 }
 	        }
-	        
-	        PropertiesFile properties = new PropertiesFile(dir + File.separator + "godPowers.properties");
-	        try {
-	          title = properties.getString("godModeTitle", "");
-	          godModeOnLogin = properties.getBoolean("godModeOnLogin", true);
-	          DemiModifier = properties.getDouble("DemiGodDamage", 0.2);
-	          godTools = properties.getBoolean("GodTools", true);
-	        } catch (Exception e) {
-	            log.log(Level.SEVERE,
-	                    "Exception while reading from godPowers.properties", e);
-	        }
-	    }
 	    
 	    public void onDisable() {
 	    }
@@ -246,13 +192,12 @@ import org.bukkit.util.Vector;
 	    	} catch(Exception e) {
 	    		System.out.println(error + "FusRoDAH.");
 	    	}
-	    	loadSettings();
+	    	loadConfig();
 	        PluginManager pm = getServer().getPluginManager();
 	        pm.registerEvents(new godPowersEntityListener(this), this);
 	        pm.registerEvents(new godPowersPlayerListener(this), this);
 	        PluginDescriptionFile pdfFile = this.getDescription();
 	        System.out.println( pdfFile.getName() + " version " + pdfFile.getVersion() + " is enabled!" );
-	        setupPermissions();
 	        populateLists();
 	    }
 	    public void populateLists()
@@ -294,15 +239,7 @@ import org.bukkit.util.Vector;
 	    public void setDebugging(final Player player, final boolean value) {
 	        debugees.put(player, value);
 	    }
-
-		public void setGodmodeEnabled(ArrayList<String> godmodeEnabled) {
-			godPowers.godmodeEnabled = godmodeEnabled;
-		}
-
-		public ArrayList<String> getGodmodeEnabled() {
-			return godmodeEnabled;
-		}
-		static void dropDeadItems(Player player)
+		void dropDeadItems(Player player)
 		{
 			if(player.getInventory() != null)
 			{
@@ -321,7 +258,7 @@ import org.bukkit.util.Vector;
 		public void recordEvent(PlayerLoginEvent event) {
 			
 		}
-		public static void arrowSlay(Location arrows, World world, Player player)
+		public void arrowSlay(Location arrows, World world, Player player)
 	    {
 					arrows = new Location(world, player.getLocation().getX()+2, player.getLocation().getY()+1, player.getLocation().getZ()+2);
 					Arrow arrow = world.spawnArrow(arrows, new Vector(5, 1, 5), 2.0f, 4.0f);

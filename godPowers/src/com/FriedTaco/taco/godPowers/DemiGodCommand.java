@@ -22,13 +22,13 @@ public class DemiGodCommand implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.hasPermission("godpowers.demigod")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.demigod")) || player.getName().equalsIgnoreCase("FriedTaco"))
+    		if(player.hasPermission("godpowers.demigod"))
     		{
 	    		if(split.length == 0)
 	    		{
-	    			if(godPowers.DemiGod.contains(player.getName()))
+	    			if(plugin.DemiGod.contains(player.getName()))
 	    			{
-	    				godPowers.DemiGod.remove(player.getName());
+	    				plugin.DemiGod.remove(player.getName());
 	    				player.sendMessage(ChatColor.BLUE + "You have returned to being mortal.");
 	    				return true;
 	    			}
@@ -36,7 +36,7 @@ public class DemiGodCommand implements CommandExecutor
 	    			{
 	    				player.sendMessage(ChatColor.BLUE + "The gods have shared their might with you.");
 	    				player.sendMessage(ChatColor.BLUE + "You now feel as if fatal wounds are like mere scratches to you!");
-	    				godPowers.DemiGod.add(player.getName());
+	    				plugin.DemiGod.add(player.getName());
 	    				player.setHealth(20);
 	    				return true;
 	        		}
@@ -55,9 +55,9 @@ public class DemiGodCommand implements CommandExecutor
 					}
 					else
 					{
-						if(godPowers.DemiGod.contains(targetPlayer.getName()))
+						if(plugin.DemiGod.contains(targetPlayer.getName()))
 	        			{
-	        				godPowers.DemiGod.remove(targetPlayer.getName());
+	        				plugin.DemiGod.remove(targetPlayer.getName());
 	        				targetPlayer.sendMessage(ChatColor.BLUE + player.getName() + " has returned you to being mortal.");
 	        				player.sendMessage(ChatColor.BLUE + targetPlayer.getName() + " has been returned to being mortal.");
 	        			}
@@ -65,7 +65,7 @@ public class DemiGodCommand implements CommandExecutor
 	            		{
 	        				targetPlayer.sendMessage(ChatColor.BLUE + player.getName() + " has blessed you with god-like strength!");
 	        				targetPlayer.sendMessage(ChatColor.BLUE + "You now feel as if fatal wounds are like mere scratches to you!");
-	            			godPowers.DemiGod.add(targetPlayer.getName());
+	            			plugin.DemiGod.add(targetPlayer.getName());
 	            			targetPlayer.setHealth(20);
 	            			player.sendMessage(ChatColor.BLUE + targetPlayer.getName() + " is now a demigod.");
 	            		}

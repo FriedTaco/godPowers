@@ -24,7 +24,7 @@ public class FusRoDAH implements CommandExecutor
     	if(sender instanceof Player)
     	{
     		player = (Player) sender;
-    		if((godPowers.Permissions == null && player.hasPermission("godpowers.fusrodah")) || (godPowers.Permissions != null && godPowers.Permissions.has(player, "godPowers.fusrodah")))
+    		if(player.hasPermission("godpowers.fusrodah"))
     		{
     			if(split.length > 0)
     			{
