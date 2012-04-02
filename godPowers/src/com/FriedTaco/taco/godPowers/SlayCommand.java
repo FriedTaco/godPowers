@@ -51,14 +51,14 @@ public class SlayCommand implements CommandExecutor
 				else if(split.length == 2)
 				{
 					targetPlayer = plugin.getServer().getPlayer(split[0]);
-					if(plugin.godmodeEnabled.contains(targetPlayer.getName()))
-					{
-						player.sendMessage("Fool! You cannot kill a god!");
-						return true;
-					}
-					else if(targetPlayer==null) 
+					if(targetPlayer==null) 
 					{
 						player.sendMessage(ChatColor.RED + "The user "+split[0]+" does not exist or is not currently logged in.");
+						return true;
+					}
+					else if(plugin.godmodeEnabled.contains(targetPlayer.getName()))
+					{
+						player.sendMessage(ChatColor.DARK_RED+"Fool! You cannot kill a god!");
 						return true;
 					}
 					if(split[1].equalsIgnoreCase("a") || split[1].equalsIgnoreCase("arrows"))
@@ -93,6 +93,26 @@ public class SlayCommand implements CommandExecutor
 					{
 						player.sendMessage(ChatColor.BLUE + "You strike " + targetPlayer.getName() + " with a bolt of lightning!");
 						player.getWorld().strikeLightning(targetPlayer.getLocation());
+					}
+					else if(split[1].equalsIgnoreCase("c") || split[1].equalsIgnoreCase("curse"))
+					{
+						player.sendMessage(ChatColor.BLUE + "You cast a curse upon " + targetPlayer.getName() + "'s head!");
+						targetPlayer.sendMessage(ChatColor.DARK_PURPLE + "The gods have cast a deadly curse upon you!");
+						int id = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+			                public void run() {
+			                	targetPlayer.damage(4);
+			                	targetPlayer.sendMessage(ChatColor.DARK_PURPLE + "You feel your life ebbing away as the curse takes hold.");
+			                }
+			            }, 30L,30L);
+						plugin.curse.put(targetPlayer.getName(), Integer.valueOf(id));
+					}
+					else if(split[1].equalsIgnoreCase("v") || split[1].equalsIgnoreCase("void"))
+					{
+						player.sendMessage(ChatColor.BLUE + "You toss " + targetPlayer.getName() + " into the void!");
+						targetPlayer.sendMessage(ChatColor.DARK_GRAY + "The gods have cast you into the void.");
+						Location voidLoc = targetPlayer.getLocation();
+						voidLoc.setY(0);
+						targetPlayer.teleport(voidLoc);
 					}
 					return true;
 				}

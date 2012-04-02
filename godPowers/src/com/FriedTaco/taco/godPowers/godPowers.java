@@ -27,7 +27,8 @@ package com.FriedTaco.taco.godPowers;
 		@SuppressWarnings("unused")
 		private Logger log;
 		public String title = "";
-	    private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();  
+	    private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>(); 
+	    public HashMap<String,Integer> curse = new HashMap<String,Integer>();
 		public ArrayList<String> godmodeEnabled = new ArrayList<String>();
 		public ArrayList<String> isJesus = new ArrayList<String>();
 		public ArrayList<String> isInferno = new ArrayList<String>();
@@ -50,13 +51,13 @@ package com.FriedTaco.taco.godPowers;
 		
 		 public void loadConfig(){
 			 try{
-				File MorePhysics = new File("plugins" + File.separator + "MorePhysics" + File.separator + "config.yml");
-				MorePhysics.mkdir();
+				File godPowers = new File("plugins" + File.separator + "godPowers" + File.separator + "config.yml");
+				godPowers.mkdir();
 	            Config = getConfig();
 	            if(!Config.contains("general.God_Mode_Title"))
 	            	Config.set("general.God_Mode_Title", "[God] ");
 	            if(!Config.contains("general.God_Mode_On_Login"))
-	            	Config.set("general.God_Mode_On_Login", "[God] ");
+	            	Config.set("general.God_Mode_On_Login", true);
 	            if(!Config.contains("general.DemiGod_Damage_Modifier"))
 	            	Config.set("general.DemiGod_Damage_Modifier", 0.2);
 	            if(!Config.contains("general.GodTools_Enabled"))
@@ -191,6 +192,12 @@ package com.FriedTaco.taco.godPowers;
     		list.put("FusRoDAH", "- Enchants item in hand with Knockback level 10!");
 	    	} catch(Exception e) {
 	    		System.out.println(error + "FusRoDAH.");
+	    	}try{
+	    		getCommand("plutus").setExecutor(new PlutusCommand(this));
+				System.out.println(message + "plutus.");
+			list.put("plutus", "- Enchants item in hand with Wealth level 10!");
+	    	} catch(Exception e) {
+	    		System.out.println(error + "plutus");
 	    	}
 	    	loadConfig();
 	        PluginManager pm = getServer().getPluginManager();
@@ -276,19 +283,19 @@ package com.FriedTaco.taco.godPowers;
 					case 256:
 						i.addEnchantment(Enchantment.DIG_SPEED, 5);
 						i.addEnchantment(Enchantment.DURABILITY, 3);
-						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						//i.addEnchantment(Enchantment.SILK_TOUCH, 1);
 						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
 						break;
 					case 257:
 						i.addEnchantment(Enchantment.DIG_SPEED, 5);
 						i.addEnchantment(Enchantment.DURABILITY, 3);
-						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						//i.addEnchantment(Enchantment.SILK_TOUCH, 1);
 						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
 						break;
 					case 258:
 						i.addEnchantment(Enchantment.DIG_SPEED, 5);
 						i.addEnchantment(Enchantment.DURABILITY, 3);
-						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						//i.addEnchantment(Enchantment.SILK_TOUCH, 1);
 						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
 						break;
 					case 261:
@@ -316,19 +323,19 @@ package com.FriedTaco.taco.godPowers;
 					case 269:
 						i.addEnchantment(Enchantment.DIG_SPEED, 5);
 						i.addEnchantment(Enchantment.DURABILITY, 3);
-						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						//i.addEnchantment(Enchantment.SILK_TOUCH, 1);
 						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
 						break;
 					case 270:
 						i.addEnchantment(Enchantment.DIG_SPEED, 5);
 						i.addEnchantment(Enchantment.DURABILITY, 3);
-						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						//i.addEnchantment(Enchantment.SILK_TOUCH, 1);
 						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
 						break;
 					case 271:
 						i.addEnchantment(Enchantment.DIG_SPEED, 5);
 						i.addEnchantment(Enchantment.DURABILITY, 3);
-						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						//i.addEnchantment(Enchantment.SILK_TOUCH, 1);
 						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
 						break;
 					case 272:
@@ -342,7 +349,7 @@ package com.FriedTaco.taco.godPowers;
 					case 273:
 						i.addEnchantment(Enchantment.DIG_SPEED, 5);
 						i.addEnchantment(Enchantment.DURABILITY, 3);
-						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						//i.addEnchantment(Enchantment.SILK_TOUCH, 1);
 						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
 						break;
 					case 274:
@@ -354,7 +361,7 @@ package com.FriedTaco.taco.godPowers;
 					case 275:
 						i.addEnchantment(Enchantment.DIG_SPEED, 5);
 						i.addEnchantment(Enchantment.DURABILITY, 3);
-						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						//i.addEnchantment(Enchantment.SILK_TOUCH, 1);
 						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
 						break;
 					case 276:
@@ -368,19 +375,19 @@ package com.FriedTaco.taco.godPowers;
 					case 277:
 						i.addEnchantment(Enchantment.DIG_SPEED, 5);
 						i.addEnchantment(Enchantment.DURABILITY, 3);
-						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						//i.addEnchantment(Enchantment.SILK_TOUCH, 1);
 						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
 						break;
 					case 278:
 						i.addEnchantment(Enchantment.DIG_SPEED, 5);
 						i.addEnchantment(Enchantment.DURABILITY, 3);
-						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						//i.addEnchantment(Enchantment.SILK_TOUCH, 1);
 						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
 						break;
 					case 279:
 						i.addEnchantment(Enchantment.DIG_SPEED, 5);
 						i.addEnchantment(Enchantment.DURABILITY, 3);
-						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						//i.addEnchantment(Enchantment.SILK_TOUCH, 1);
 						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
 						break;
 					case 283:
@@ -394,19 +401,19 @@ package com.FriedTaco.taco.godPowers;
 					case 284:
 						i.addEnchantment(Enchantment.DIG_SPEED, 5);
 						i.addEnchantment(Enchantment.DURABILITY, 3);
-						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						//i.addEnchantment(Enchantment.SILK_TOUCH, 1);
 						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
 						break;
 					case 285:
 						i.addEnchantment(Enchantment.DIG_SPEED, 5);
 						i.addEnchantment(Enchantment.DURABILITY, 3);
-						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						//i.addEnchantment(Enchantment.SILK_TOUCH, 1);
 						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
 						break;
 					case 286:
 						i.addEnchantment(Enchantment.DIG_SPEED, 5);
 						i.addEnchantment(Enchantment.DURABILITY, 3);
-						i.addEnchantment(Enchantment.SILK_TOUCH, 1);
+						//i.addEnchantment(Enchantment.SILK_TOUCH, 1);
 						i.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3);
 						break;
 					case 298:

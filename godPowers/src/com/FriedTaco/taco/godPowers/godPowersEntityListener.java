@@ -40,15 +40,6 @@ public class godPowersEntityListener implements Listener
 			{
 				event.setCancelled(true);
 			}
-			else if(plugin.burn.contains(player.getName()) && player.getHealth() <= event.getDamage())
-			{
-				plugin.burn.remove(player.getName());
-				player.setFireTicks(0);
-			}
-			else if(plugin.arrowKill.contains(player.getName()) && player.getHealth() <= event.getDamage())
-			{
-				plugin.arrowKill.remove(player.getName());
-			}
 			else if(plugin.DemiGod.contains(player.getName()))
 			{
 				event.setDamage((int) (event.getDamage() * plugin.DemiModifier));
@@ -72,6 +63,28 @@ public class godPowersEntityListener implements Listener
 						e.getEntity().setVelocity(v);
 					}
 				}
+			}
+		}
+    }
+    @EventHandler
+    public void onEntityDeath(EntityDeathEvent event)
+    {
+    	if(event.getEntity() instanceof Player)
+		{
+			Player player = (Player) event.getEntity();
+			String name = player.getName();
+			if(plugin.burn.contains(name))
+			{
+				plugin.burn.remove(player.getName());
+				player.setFireTicks(0);
+			}
+			else if(plugin.arrowKill.contains(name))
+			{
+				plugin.arrowKill.remove(player.getName());
+			}
+			else if(plugin.curse.containsKey(name))
+			{
+				plugin.getServer().getScheduler().cancelTask(plugin.curse.get(name).intValue());
 			}
 		}
     }
